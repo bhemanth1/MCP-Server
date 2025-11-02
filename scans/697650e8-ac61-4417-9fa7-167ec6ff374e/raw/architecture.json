@@ -1,0 +1,331 @@
+{
+  "scan_id": "697650e8-ac61-4417-9fa7-167ec6ff374e",
+  "start_time": "2025-11-02T06:51:57.155037",
+  "tools": [
+    {
+      "name": "subfinder",
+      "start_time": "2025-11-02T06:51:57.163234",
+      "status": "completed",
+      "end_time": "2025-11-02T06:52:03.934929",
+      "findings_count": 0
+    },
+    {
+      "name": "nmap",
+      "start_time": "2025-11-02T06:52:03.934942",
+      "status": "completed",
+      "end_time": "2025-11-02T06:52:45.538459",
+      "findings_count": 1
+    },
+    {
+      "name": "nikto",
+      "start_time": "2025-11-02T06:52:45.538465",
+      "status": "completed",
+      "end_time": "2025-11-02T06:52:58.620901",
+      "findings_count": 6
+    },
+    {
+      "name": "gobuster",
+      "start_time": "2025-11-02T06:52:58.620906",
+      "status": "completed",
+      "end_time": "2025-11-02T06:55:15.815119",
+      "findings_count": 3
+    },
+    {
+      "name": "nslookupdns",
+      "start_time": "2025-11-02T06:55:15.815151",
+      "status": "completed",
+      "end_time": "2025-11-02T06:55:15.952437",
+      "findings_count": 0
+    },
+    {
+      "name": "traceroute",
+      "start_time": "2025-11-02T06:55:15.952455",
+      "status": "completed",
+      "end_time": "2025-11-02T06:56:41.130120",
+      "findings_count": 0
+    }
+  ],
+  "flow": [
+    {
+      "step": "subfinder_request",
+      "timestamp": "2025-11-02T06:51:57.163257",
+      "type": "request",
+      "data": {
+        "timestamp": "2025-11-02T06:51:57.163249",
+        "tool": "subfinder",
+        "method": "SCAN",
+        "url": "testphp.vulnweb.com",
+        "headers": {
+          "tool": "subfinder"
+        },
+        "body": ""
+      }
+    },
+    {
+      "step": "subfinder_response",
+      "timestamp": "2025-11-02T06:52:03.934920",
+      "type": "response",
+      "data": {
+        "timestamp": "2025-11-02T06:52:03.934901",
+        "tool": "subfinder",
+        "status_code": 200,
+        "headers": {},
+        "body_size": 0,
+        "body_preview": ""
+      }
+    },
+    {
+      "step": "nmap_request",
+      "timestamp": "2025-11-02T06:52:03.934958",
+      "type": "request",
+      "data": {
+        "timestamp": "2025-11-02T06:52:03.934950",
+        "tool": "nmap",
+        "method": "SCAN",
+        "url": "testphp.vulnweb.com",
+        "headers": {
+          "tool": "nmap"
+        },
+        "body": ""
+      }
+    },
+    {
+      "step": "nmap_response",
+      "timestamp": "2025-11-02T06:52:45.538453",
+      "type": "response",
+      "data": {
+        "timestamp": "2025-11-02T06:52:45.538438",
+        "tool": "nmap",
+        "status_code": 200,
+        "headers": {},
+        "body_size": 1,
+        "body_preview": ""
+      }
+    },
+    {
+      "step": "nikto_request",
+      "timestamp": "2025-11-02T06:52:45.538472",
+      "type": "request",
+      "data": {
+        "timestamp": "2025-11-02T06:52:45.538468",
+        "tool": "nikto",
+        "method": "SCAN",
+        "url": "testphp.vulnweb.com",
+        "headers": {
+          "tool": "nikto"
+        },
+        "body": ""
+      }
+    },
+    {
+      "step": "nikto_response",
+      "timestamp": "2025-11-02T06:52:58.620896",
+      "type": "response",
+      "data": {
+        "timestamp": "2025-11-02T06:52:58.620885",
+        "tool": "nikto",
+        "status_code": 200,
+        "headers": {},
+        "body_size": 6,
+        "body_preview": ""
+      }
+    },
+    {
+      "step": "gobuster_request",
+      "timestamp": "2025-11-02T06:52:58.620911",
+      "type": "request",
+      "data": {
+        "timestamp": "2025-11-02T06:52:58.620908",
+        "tool": "gobuster",
+        "method": "SCAN",
+        "url": "testphp.vulnweb.com",
+        "headers": {
+          "tool": "gobuster"
+        },
+        "body": ""
+      }
+    },
+    {
+      "step": "gobuster_response",
+      "timestamp": "2025-11-02T06:55:15.815087",
+      "type": "response",
+      "data": {
+        "timestamp": "2025-11-02T06:55:15.815023",
+        "tool": "gobuster",
+        "status_code": 200,
+        "headers": {},
+        "body_size": 3,
+        "body_preview": ""
+      }
+    },
+    {
+      "step": "nslookupdns_request",
+      "timestamp": "2025-11-02T06:55:15.815199",
+      "type": "request",
+      "data": {
+        "timestamp": "2025-11-02T06:55:15.815173",
+        "tool": "nslookupdns",
+        "method": "SCAN",
+        "url": "testphp.vulnweb.com",
+        "headers": {
+          "tool": "nslookupdns"
+        },
+        "body": ""
+      }
+    },
+    {
+      "step": "nslookupdns_response",
+      "timestamp": "2025-11-02T06:55:15.952415",
+      "type": "response",
+      "data": {
+        "timestamp": "2025-11-02T06:55:15.952378",
+        "tool": "nslookupdns",
+        "status_code": 200,
+        "headers": {},
+        "body_size": 0,
+        "body_preview": ""
+      }
+    },
+    {
+      "step": "traceroute_request",
+      "timestamp": "2025-11-02T06:55:15.952483",
+      "type": "request",
+      "data": {
+        "timestamp": "2025-11-02T06:55:15.952468",
+        "tool": "traceroute",
+        "method": "SCAN",
+        "url": "testphp.vulnweb.com",
+        "headers": {
+          "tool": "traceroute"
+        },
+        "body": ""
+      }
+    },
+    {
+      "step": "traceroute_response",
+      "timestamp": "2025-11-02T06:56:41.130113",
+      "type": "response",
+      "data": {
+        "timestamp": "2025-11-02T06:56:41.130099",
+        "tool": "traceroute",
+        "status_code": 200,
+        "headers": {},
+        "body_size": 0,
+        "body_preview": ""
+      }
+    }
+  ],
+  "requests": [
+    {
+      "timestamp": "2025-11-02T06:51:57.163249",
+      "tool": "subfinder",
+      "method": "SCAN",
+      "url": "testphp.vulnweb.com",
+      "headers": {
+        "tool": "subfinder"
+      },
+      "body": ""
+    },
+    {
+      "timestamp": "2025-11-02T06:52:03.934950",
+      "tool": "nmap",
+      "method": "SCAN",
+      "url": "testphp.vulnweb.com",
+      "headers": {
+        "tool": "nmap"
+      },
+      "body": ""
+    },
+    {
+      "timestamp": "2025-11-02T06:52:45.538468",
+      "tool": "nikto",
+      "method": "SCAN",
+      "url": "testphp.vulnweb.com",
+      "headers": {
+        "tool": "nikto"
+      },
+      "body": ""
+    },
+    {
+      "timestamp": "2025-11-02T06:52:58.620908",
+      "tool": "gobuster",
+      "method": "SCAN",
+      "url": "testphp.vulnweb.com",
+      "headers": {
+        "tool": "gobuster"
+      },
+      "body": ""
+    },
+    {
+      "timestamp": "2025-11-02T06:55:15.815173",
+      "tool": "nslookupdns",
+      "method": "SCAN",
+      "url": "testphp.vulnweb.com",
+      "headers": {
+        "tool": "nslookupdns"
+      },
+      "body": ""
+    },
+    {
+      "timestamp": "2025-11-02T06:55:15.952468",
+      "tool": "traceroute",
+      "method": "SCAN",
+      "url": "testphp.vulnweb.com",
+      "headers": {
+        "tool": "traceroute"
+      },
+      "body": ""
+    }
+  ],
+  "responses": [
+    {
+      "timestamp": "2025-11-02T06:52:03.934901",
+      "tool": "subfinder",
+      "status_code": 200,
+      "headers": {},
+      "body_size": 0,
+      "body_preview": ""
+    },
+    {
+      "timestamp": "2025-11-02T06:52:45.538438",
+      "tool": "nmap",
+      "status_code": 200,
+      "headers": {},
+      "body_size": 1,
+      "body_preview": ""
+    },
+    {
+      "timestamp": "2025-11-02T06:52:58.620885",
+      "tool": "nikto",
+      "status_code": 200,
+      "headers": {},
+      "body_size": 6,
+      "body_preview": ""
+    },
+    {
+      "timestamp": "2025-11-02T06:55:15.815023",
+      "tool": "gobuster",
+      "status_code": 200,
+      "headers": {},
+      "body_size": 3,
+      "body_preview": ""
+    },
+    {
+      "timestamp": "2025-11-02T06:55:15.952378",
+      "tool": "nslookupdns",
+      "status_code": 200,
+      "headers": {},
+      "body_size": 0,
+      "body_preview": ""
+    },
+    {
+      "timestamp": "2025-11-02T06:56:41.130099",
+      "tool": "traceroute",
+      "status_code": 200,
+      "headers": {},
+      "body_size": 0,
+      "body_preview": ""
+    }
+  ],
+  "end_time": "2025-11-02T06:56:41.130134"
+}

@@ -1,0 +1,11 @@
+Tool,Finding Type,Details
+nmap,Open Port,80/tcp - http
+nikto,Vulnerability,http://testphp.vulnweb.com - Missing X-Frame-Options header
+nikto,Vulnerability,http://testphp.vulnweb.com - Missing X-Content-Type-Options header
+nikto,Vulnerability,http://testphp.vulnweb.com - Missing X-XSS-Protection header
+nikto,Vulnerability,http://testphp.vulnweb.com - Missing CSP header
+nikto,Vulnerability,http://testphp.vulnweb.com - Missing HSTS header
+nikto,Vulnerability,http://testphp.vulnweb.com/admin/ - admin_panel found at /admin/
+gobuster,Directory,admin - Status: 301
+gobuster,Directory,cgi-bin - Status: 403
+gobuster,Directory,images - Status: 301

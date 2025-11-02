@@ -1,0 +1,119 @@
+{
+  "scan_id": "37b1b7e1-e198-4581-927a-69de2c26e5a3",
+  "start_time": "2025-11-02T07:35:13.185054",
+  "tools": [
+    {
+      "name": "nmap",
+      "start_time": "2025-11-02T07:35:13.192721",
+      "status": "completed",
+      "end_time": "2025-11-02T07:35:34.515558",
+      "findings_count": 2
+    },
+    {
+      "name": "subfinder",
+      "start_time": "2025-11-02T07:35:34.515565",
+      "status": "completed",
+      "end_time": "2025-11-02T07:35:36.571716",
+      "findings_count": 0
+    }
+  ],
+  "flow": [
+    {
+      "step": "nmap_request",
+      "timestamp": "2025-11-02T07:35:13.192758",
+      "type": "request",
+      "data": {
+        "timestamp": "2025-11-02T07:35:13.192745",
+        "tool": "nmap",
+        "method": "SCAN",
+        "url": "scanme.nmap.org",
+        "headers": {
+          "tool": "nmap"
+        },
+        "body": ""
+      }
+    },
+    {
+      "step": "nmap_response",
+      "timestamp": "2025-11-02T07:35:34.515552",
+      "type": "response",
+      "data": {
+        "timestamp": "2025-11-02T07:35:34.515538",
+        "tool": "nmap",
+        "status_code": 200,
+        "headers": {},
+        "body_size": 2,
+        "body_preview": ""
+      }
+    },
+    {
+      "step": "subfinder_request",
+      "timestamp": "2025-11-02T07:35:34.515575",
+      "type": "request",
+      "data": {
+        "timestamp": "2025-11-02T07:35:34.515570",
+        "tool": "subfinder",
+        "method": "SCAN",
+        "url": "scanme.nmap.org",
+        "headers": {
+          "tool": "subfinder"
+        },
+        "body": ""
+      }
+    },
+    {
+      "step": "subfinder_response",
+      "timestamp": "2025-11-02T07:35:36.571689",
+      "type": "response",
+      "data": {
+        "timestamp": "2025-11-02T07:35:36.571642",
+        "tool": "subfinder",
+        "status_code": 200,
+        "headers": {},
+        "body_size": 0,
+        "body_preview": ""
+      }
+    }
+  ],
+  "requests": [
+    {
+      "timestamp": "2025-11-02T07:35:13.192745",
+      "tool": "nmap",
+      "method": "SCAN",
+      "url": "scanme.nmap.org",
+      "headers": {
+        "tool": "nmap"
+      },
+      "body": ""
+    },
+    {
+      "timestamp": "2025-11-02T07:35:34.515570",
+      "tool": "subfinder",
+      "method": "SCAN",
+      "url": "scanme.nmap.org",
+      "headers": {
+        "tool": "subfinder"
+      },
+      "body": ""
+    }
+  ],
+  "responses": [
+    {
+      "timestamp": "2025-11-02T07:35:34.515538",
+      "tool": "nmap",
+      "status_code": 200,
+      "headers": {},
+      "body_size": 2,
+      "body_preview": ""
+    },
+    {
+      "timestamp": "2025-11-02T07:35:36.571642",
+      "tool": "subfinder",
+      "status_code": 200,
+      "headers": {},
+      "body_size": 0,
+      "body_preview": ""
+    }
+  ],
+  "end_time": "2025-11-02T07:35:36.571744"
+}

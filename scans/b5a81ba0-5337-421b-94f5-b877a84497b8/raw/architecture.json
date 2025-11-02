@@ -1,0 +1,331 @@
+{
+  "scan_id": "b5a81ba0-5337-421b-94f5-b877a84497b8",
+  "start_time": "2025-11-02T07:38:32.313429",
+  "tools": [
+    {
+      "name": "subfinder",
+      "start_time": "2025-11-02T07:38:32.334940",
+      "status": "completed",
+      "end_time": "2025-11-02T07:38:34.676316",
+      "findings_count": 0
+    },
+    {
+      "name": "nmap",
+      "start_time": "2025-11-02T07:38:34.676357",
+      "status": "completed",
+      "end_time": "2025-11-02T07:38:56.425991",
+      "findings_count": 2
+    },
+    {
+      "name": "nikto",
+      "start_time": "2025-11-02T07:38:56.426002",
+      "status": "completed",
+      "end_time": "2025-11-02T07:39:01.988031",
+      "findings_count": 7
+    },
+    {
+      "name": "gobuster",
+      "start_time": "2025-11-02T07:39:01.988041",
+      "status": "completed",
+      "end_time": "2025-11-02T07:41:19.703465",
+      "findings_count": 1
+    },
+    {
+      "name": "nslookupdns",
+      "start_time": "2025-11-02T07:41:19.703479",
+      "status": "completed",
+      "end_time": "2025-11-02T07:41:20.143761",
+      "findings_count": 0
+    },
+    {
+      "name": "traceroute",
+      "start_time": "2025-11-02T07:41:20.143778",
+      "status": "completed",
+      "end_time": "2025-11-02T07:42:57.805933",
+      "findings_count": 0
+    }
+  ],
+  "flow": [
+    {
+      "step": "subfinder_request",
+      "timestamp": "2025-11-02T07:38:32.334994",
+      "type": "request",
+      "data": {
+        "timestamp": "2025-11-02T07:38:32.334971",
+        "tool": "subfinder",
+        "method": "SCAN",
+        "url": "scanme.nmap.org",
+        "headers": {
+          "tool": "subfinder"
+        },
+        "body": ""
+      }
+    },
+    {
+      "step": "subfinder_response",
+      "timestamp": "2025-11-02T07:38:34.676302",
+      "type": "response",
+      "data": {
+        "timestamp": "2025-11-02T07:38:34.676278",
+        "tool": "subfinder",
+        "status_code": 200,
+        "headers": {},
+        "body_size": 0,
+        "body_preview": ""
+      }
+    },
+    {
+      "step": "nmap_request",
+      "timestamp": "2025-11-02T07:38:34.676388",
+      "type": "request",
+      "data": {
+        "timestamp": "2025-11-02T07:38:34.676365",
+        "tool": "nmap",
+        "method": "SCAN",
+        "url": "scanme.nmap.org",
+        "headers": {
+          "tool": "nmap"
+        },
+        "body": ""
+      }
+    },
+    {
+      "step": "nmap_response",
+      "timestamp": "2025-11-02T07:38:56.425981",
+      "type": "response",
+      "data": {
+        "timestamp": "2025-11-02T07:38:56.425957",
+        "tool": "nmap",
+        "status_code": 200,
+        "headers": {},
+        "body_size": 2,
+        "body_preview": ""
+      }
+    },
+    {
+      "step": "nikto_request",
+      "timestamp": "2025-11-02T07:38:56.426017",
+      "type": "request",
+      "data": {
+        "timestamp": "2025-11-02T07:38:56.426009",
+        "tool": "nikto",
+        "method": "SCAN",
+        "url": "scanme.nmap.org",
+        "headers": {
+          "tool": "nikto"
+        },
+        "body": ""
+      }
+    },
+    {
+      "step": "nikto_response",
+      "timestamp": "2025-11-02T07:39:01.988022",
+      "type": "response",
+      "data": {
+        "timestamp": "2025-11-02T07:39:01.988003",
+        "tool": "nikto",
+        "status_code": 200,
+        "headers": {},
+        "body_size": 7,
+        "body_preview": ""
+      }
+    },
+    {
+      "step": "gobuster_request",
+      "timestamp": "2025-11-02T07:39:01.988067",
+      "type": "request",
+      "data": {
+        "timestamp": "2025-11-02T07:39:01.988061",
+        "tool": "gobuster",
+        "method": "SCAN",
+        "url": "scanme.nmap.org",
+        "headers": {
+          "tool": "gobuster"
+        },
+        "body": ""
+      }
+    },
+    {
+      "step": "gobuster_response",
+      "timestamp": "2025-11-02T07:41:19.703451",
+      "type": "response",
+      "data": {
+        "timestamp": "2025-11-02T07:41:19.703417",
+        "tool": "gobuster",
+        "status_code": 200,
+        "headers": {},
+        "body_size": 1,
+        "body_preview": ""
+      }
+    },
+    {
+      "step": "nslookupdns_request",
+      "timestamp": "2025-11-02T07:41:19.703502",
+      "type": "request",
+      "data": {
+        "timestamp": "2025-11-02T07:41:19.703491",
+        "tool": "nslookupdns",
+        "method": "SCAN",
+        "url": "scanme.nmap.org",
+        "headers": {
+          "tool": "nslookupdns"
+        },
+        "body": ""
+      }
+    },
+    {
+      "step": "nslookupdns_response",
+      "timestamp": "2025-11-02T07:41:20.143748",
+      "type": "response",
+      "data": {
+        "timestamp": "2025-11-02T07:41:20.143722",
+        "tool": "nslookupdns",
+        "status_code": 200,
+        "headers": {},
+        "body_size": 0,
+        "body_preview": ""
+      }
+    },
+    {
+      "step": "traceroute_request",
+      "timestamp": "2025-11-02T07:41:20.143796",
+      "type": "request",
+      "data": {
+        "timestamp": "2025-11-02T07:41:20.143788",
+        "tool": "traceroute",
+        "method": "SCAN",
+        "url": "scanme.nmap.org",
+        "headers": {
+          "tool": "traceroute"
+        },
+        "body": ""
+      }
+    },
+    {
+      "step": "traceroute_response",
+      "timestamp": "2025-11-02T07:42:57.805912",
+      "type": "response",
+      "data": {
+        "timestamp": "2025-11-02T07:42:57.805875",
+        "tool": "traceroute",
+        "status_code": 200,
+        "headers": {},
+        "body_size": 0,
+        "body_preview": ""
+      }
+    }
+  ],
+  "requests": [
+    {
+      "timestamp": "2025-11-02T07:38:32.334971",
+      "tool": "subfinder",
+      "method": "SCAN",
+      "url": "scanme.nmap.org",
+      "headers": {
+        "tool": "subfinder"
+      },
+      "body": ""
+    },
+    {
+      "timestamp": "2025-11-02T07:38:34.676365",
+      "tool": "nmap",
+      "method": "SCAN",
+      "url": "scanme.nmap.org",
+      "headers": {
+        "tool": "nmap"
+      },
+      "body": ""
+    },
+    {
+      "timestamp": "2025-11-02T07:38:56.426009",
+      "tool": "nikto",
+      "method": "SCAN",
+      "url": "scanme.nmap.org",
+      "headers": {
+        "tool": "nikto"
+      },
+      "body": ""
+    },
+    {
+      "timestamp": "2025-11-02T07:39:01.988061",
+      "tool": "gobuster",
+      "method": "SCAN",
+      "url": "scanme.nmap.org",
+      "headers": {
+        "tool": "gobuster"
+      },
+      "body": ""
+    },
+    {
+      "timestamp": "2025-11-02T07:41:19.703491",
+      "tool": "nslookupdns",
+      "method": "SCAN",
+      "url": "scanme.nmap.org",
+      "headers": {
+        "tool": "nslookupdns"
+      },
+      "body": ""
+    },
+    {
+      "timestamp": "2025-11-02T07:41:20.143788",
+      "tool": "traceroute",
+      "method": "SCAN",
+      "url": "scanme.nmap.org",
+      "headers": {
+        "tool": "traceroute"
+      },
+      "body": ""
+    }
+  ],
+  "responses": [
+    {
+      "timestamp": "2025-11-02T07:38:34.676278",
+      "tool": "subfinder",
+      "status_code": 200,
+      "headers": {},
+      "body_size": 0,
+      "body_preview": ""
+    },
+    {
+      "timestamp": "2025-11-02T07:38:56.425957",
+      "tool": "nmap",
+      "status_code": 200,
+      "headers": {},
+      "body_size": 2,
+      "body_preview": ""
+    },
+    {
+      "timestamp": "2025-11-02T07:39:01.988003",
+      "tool": "nikto",
+      "status_code": 200,
+      "headers": {},
+      "body_size": 7,
+      "body_preview": ""
+    },
+    {
+      "timestamp": "2025-11-02T07:41:19.703417",
+      "tool": "gobuster",
+      "status_code": 200,
+      "headers": {},
+      "body_size": 1,
+      "body_preview": ""
+    },
+    {
+      "timestamp": "2025-11-02T07:41:20.143722",
+      "tool": "nslookupdns",
+      "status_code": 200,
+      "headers": {},
+      "body_size": 0,
+      "body_preview": ""
+    },
+    {
+      "timestamp": "2025-11-02T07:42:57.805875",
+      "tool": "traceroute",
+      "status_code": 200,
+      "headers": {},
+      "body_size": 0,
+      "body_preview": ""
+    }
+  ],
+  "end_time": "2025-11-02T07:42:57.805966"
+}
