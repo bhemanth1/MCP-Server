@@ -1,10 +1,10 @@
-# 🔒 MCP Security Scanner
+# MCP Security Scanner
 
 **Multi-Tool Cybersecurity Reconnaissance Platform**
 
 A comprehensive, modern desktop application for cybersecurity reconnaissance that integrates multiple scanning tools into a unified, user-friendly interface with advanced visualizations and reporting.
 
-## ✨ Features
+## Features
 
 ### Core Capabilities
 - **Multi-Tool Scanning**: Nmap, Subfinder, Nikto, Gobuster, NSLookup DNS, Traceroute
@@ -21,7 +21,7 @@ A comprehensive, modern desktop application for cybersecurity reconnaissance tha
 - **Secure Storage**: SQLite database with encrypted metadata options
 - **Input Sanitization**: Robust validation and sanitization of scan targets
 
-## 🏗️ Architecture
+## Architecture
 
 ### High-Level Design
 ```
@@ -63,7 +63,7 @@ A comprehensive, modern desktop application for cybersecurity reconnaissance tha
 - Lucide React (icons)
 - Axios (HTTP client)
 
-## 🚀 Quick Start
+## Quick Start
 
 ### Prerequisites
 
@@ -76,6 +76,55 @@ A comprehensive, modern desktop application for cybersecurity reconnaissance tha
    - `gobuster` - Directory brute-forcer
    - `nslookup` - DNS lookup (usually pre-installed)
    - `traceroute` / `tracert` - Network path tracing (usually pre-installed)
+
+### Tool Installation (nmap, subfinder, gobuster, nikto)
+
+Windows (PowerShell):
+
+```powershell
+# Optional: Install Chocolatey
+Set-ExecutionPolicy Bypass -Scope Process -Force
+[System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072
+iex ((New-Object System.Net.WebClient).DownloadString('https://community.chocolatey.org/install.ps1'))
+
+# Install Nmap and Go
+choco install nmap golang -y
+
+# Install Go-based tools (ensure %USERPROFILE%\go\bin is in PATH)
+$env:Path += ";$env:USERPROFILE\go\bin"
+go install -v github.com/projectdiscovery/subfinder/v2/cmd/subfinder@latest
+go install github.com/OJ/gobuster/v3@latest
+
+# Nikto (best via WSL) or download from GitHub
+```
+
+Linux (Debian/Ubuntu):
+
+```bash
+sudo apt-get update
+sudo apt-get install -y nmap nikto dnsutils traceroute golang-go
+go install -v github.com/projectdiscovery/subfinder/v2/cmd/subfinder@latest
+go install github.com/OJ/gobuster/v3@latest
+echo 'export PATH=$PATH:~/go/bin' >> ~/.bashrc && source ~/.bashrc
+```
+
+macOS (Homebrew):
+
+```bash
+brew install nmap nikto go
+go install -v github.com/projectdiscovery/subfinder/v2/cmd/subfinder@latest
+go install github.com/OJ/gobuster/v3@latest
+echo 'export PATH=$PATH:~/go/bin' >> ~/.zshrc && source ~/.zshrc
+```
+
+Verify tools:
+
+```bash
+nmap --version
+subfinder -version
+nikto -Version
+gobuster -h
+```
 
 ### Installation
 
@@ -125,7 +174,7 @@ backend\start_backend.bat
 frontend\start_frontend.bat
 ```
 
-## 📖 Usage Guide
+## Usage Guide
 
 ### Starting a Scan
 
@@ -154,7 +203,7 @@ The risk index (0-10) considers:
 - **Open Ports**: Exposed services and potential attack surface
 - **Subdomain Count**: Attack surface expansion
 
-## 📁 Project Structure
+## Project Structure
 
 ```
 MCP-APP/
@@ -190,7 +239,7 @@ MCP-APP/
 └── README.md
 ```
 
-## 🔧 API Endpoints
+## API Endpoints
 
 ### Scan Management
 - `POST /start_scan` - Start a new scan
@@ -206,7 +255,7 @@ MCP-APP/
 ### Utilities
 - `GET /tools` - List available scanning tools
 
-## 🎨 Features in Detail
+## Features in Detail
 
 ### Real-Time Progress Tracking
 - Live updates every 2 seconds
@@ -226,7 +275,7 @@ MCP-APP/
 - **CSV**: Structured findings for spreadsheet analysis
 - **HTML**: Interactive web reports with embedded charts
 
-## ⚠️ Legal & Ethical Guidelines
+## Legal & Ethical Guidelines
 
 **CRITICAL**: Only scan domains you own or have explicit written permission to test.
 
@@ -242,7 +291,7 @@ MCP-APP/
 - Use responsible disclosure for findings
 - Keep scan results confidential
 
-## 🛠️ Development
+## Development
 
 ### Adding New Tools
 
@@ -283,7 +332,7 @@ Or create installer:
 npm run build && electron-builder
 ```
 
-## 🐛 Troubleshooting
+## Troubleshooting
 
 ### Tools Not Found
 - Ensure all tools are installed and in system PATH
@@ -315,7 +364,7 @@ npm run build && electron-builder
 - Plotly.js - Visualization library
 - Electron - Desktop app framework
 
-## 🔄 Version History
+## Version History
 
 ### v2.0.0 (Current)
 - Complete UI redesign with animations
@@ -330,7 +379,7 @@ npm run build && electron-builder
 - Basic scanning functionality
 - Simple HTML reports
 
-## 🤝 Contributing
+## Contributing
 
 Contributions welcome! Please:
 1. Follow code style conventions
@@ -338,7 +387,7 @@ Contributions welcome! Please:
 3. Update documentation
 4. Respect security best practices
 
-## 📧 Support
+## Support
 
 For issues, questions, or suggestions:
 - Check existing GitHub issues
@@ -347,6 +396,6 @@ For issues, questions, or suggestions:
 
 ---
 
-**⚡ Built with security in mind. Use responsibly. ⚡**
+**Built with security in mind. Use responsibly.**
 
 
