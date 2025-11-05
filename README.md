@@ -482,16 +482,3 @@ For issues or suggestions:
 **Built with security in mind. Use responsibly.**
 
 ```
-
----
-
-**Instructions:**
-- Save this content as `README.md` inside your repo root.
-- GitHub will automatically render it perfectly.
-- The **“Error getting preview”** message you saw happens only if formatting breaks — this version fixes all Markdown syntax and indentation issues.
-
-Would you like me to include a **“Screenshots” section** (with placeholders for UI images like dashboard, progress, and reports)? It makes your GitHub project look more professional.
-```
-
----
->>>>>>> 3780ba4 (Added complete README.md with proper documentation)
