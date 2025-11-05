@@ -84,7 +84,7 @@ A comprehensive, modern application for cybersecurity reconnaissance that integr
 
 ---
 
-## ⚙️ Quick Start
+## Quick Start
 
 ### Prerequisites
 
