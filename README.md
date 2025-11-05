@@ -75,6 +75,8 @@ A comprehensive, modern application for cybersecurity reconnaissance that integr
 - Concurrent.futures (parallel execution)
 
 **Frontend:**
+- In Frontend, there are heavy files. So, I added the URL below. Go through that and download the zip file & then place it inside the MCP-APP. (According to the Project Structure)
+  **The Zip File URL (Driver Link):  https://drive.google.com/file/d/1jtAWLnNkM2GQK7ORVJ8c7Rmd0h7RJ0KP/view?usp=sharing**
 - React 18
 - Electron (desktop packaging)
 - Framer Motion (animations)
