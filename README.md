@@ -1,10 +1,6 @@
-Perfect 👍 Hemanth — here’s your **complete, properly formatted and GitHub-ready README.md** in **Markdown**, with **correct syntax**, **GitHub-compatible code blocks**, and your **added start commands** section included at the end.
 
-Just copy this entire content and paste it into your **`README.md`** file — it will render perfectly on GitHub.
 
----
 
-```markdown
 # MCP Security Scanner
 
 **Multi-Tool Cybersecurity Reconnaissance Platform**
@@ -497,4 +493,5 @@ For issues or suggestions:
 
 Would you like me to include a **“Screenshots” section** (with placeholders for UI images like dashboard, progress, and reports)? It makes your GitHub project look more professional.
 ```
+
 
