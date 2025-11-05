@@ -60,4 +60,7 @@ desktop.ini
 temp.json
 *.tmp
 
+# Exclude packaged builds
+frontend/dist/
+
 
