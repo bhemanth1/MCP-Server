@@ -424,7 +424,7 @@ npm start
 
 ---
 
-## 🧾 License & Credits
+## License & Credits
 
 **Disclaimer:**
 This tool is for authorized security testing only. Use responsibly.
@@ -481,4 +481,9 @@ For issues or suggestions:
 
 **Built with security in mind. Use responsibly.**
 
-```
+---
+
+**Team Members (The Project Developed By Woxsen Junior Scholars)**
+1) Bandi Hemanth (22WU0106028)
+2) Vamsi.P (22WU0106013)
+3) Rahul Samineni (22WU0106023)
