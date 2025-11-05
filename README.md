@@ -2,16 +2,16 @@
 
 # MCP Security Scanner
 
-**Multi-Tool Cybersecurity Reconnaissance Platform**
+**Multi-Tool Cybersecurity Reconnaissance**
 
-A comprehensive, modern desktop application for cybersecurity reconnaissance that integrates multiple scanning tools into a unified, user-friendly interface with advanced visualizations and reporting.
+A comprehensive, modern application for cybersecurity reconnaissance that integrates multiple scanning tools into a unified, user-friendly interface with advanced visualizations and reporting.
 
 ---
 
 ## Features
 
 ### Core Capabilities
-- **Multi-Tool Scanning**: Nmap, Subfinder, Nikto, Gobuster, NSLookup DNS, Traceroute  
+- **Multi-Tool Scanning**: Nmap, Subfinder, Nikto, Gobuster, NSLookup DNS, Traceroute, Wappalyzer
 - **Real-Time Progress Tracking**: Live updates with per-tool status monitoring  
 - **Advanced Risk Assessment**: Automated risk scoring (0–10) based on multiple factors  
 - **Interactive Visualizations**: Plotly.js charts for ports, subdomains, vulnerabilities  
