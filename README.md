@@ -97,6 +97,7 @@ A comprehensive, modern application for cybersecurity reconnaissance that integr
    - `gobuster` — Directory brute-forcer  
    - `nslookup` — DNS lookup (usually pre-installed)  
    - `traceroute` / `tracert` — Network path tracing (usually pre-installed)
+   - `` — 
 
 ---
 
