@@ -1,0 +1,384 @@
+{
+  "scan_id": "9af9577f-fa5b-4fd1-973c-1f78f3f83069",
+  "start_time": "2025-11-05T02:30:32.161486",
+  "tools": [
+    {
+      "name": "subfinder",
+      "start_time": "2025-11-05T02:30:32.175598",
+      "status": "completed",
+      "end_time": "2025-11-05T02:30:57.719544",
+      "findings_count": 919
+    },
+    {
+      "name": "nmap",
+      "start_time": "2025-11-05T02:30:57.719576",
+      "status": "completed",
+      "end_time": "2025-11-05T02:31:19.398806",
+      "findings_count": 2
+    },
+    {
+      "name": "nikto",
+      "start_time": "2025-11-05T02:31:19.398812",
+      "status": "completed",
+      "end_time": "2025-11-05T02:33:22.758967",
+      "findings_count": 3
+    },
+    {
+      "name": "gobuster",
+      "start_time": "2025-11-05T02:33:22.759096",
+      "status": "completed",
+      "end_time": "2025-11-05T02:33:42.639255",
+      "findings_count": 2
+    },
+    {
+      "name": "nslookupdns",
+      "start_time": "2025-11-05T02:33:42.639261",
+      "status": "completed",
+      "end_time": "2025-11-05T02:33:44.236799",
+      "findings_count": 0
+    },
+    {
+      "name": "traceroute",
+      "start_time": "2025-11-05T02:33:44.236810",
+      "status": "completed",
+      "end_time": "2025-11-05T02:34:09.369472",
+      "findings_count": 0
+    },
+    {
+      "name": "wappalyzer",
+      "start_time": "2025-11-05T02:34:09.369480",
+      "status": "completed",
+      "end_time": "2025-11-05T02:34:13.622014",
+      "findings_count": 0
+    }
+  ],
+  "flow": [
+    {
+      "step": "subfinder_request",
+      "timestamp": "2025-11-05T02:30:32.175649",
+      "type": "request",
+      "data": {
+        "timestamp": "2025-11-05T02:30:32.175630",
+        "tool": "subfinder",
+        "method": "SCAN",
+        "url": "www.nba.com",
+        "headers": {
+          "tool": "subfinder"
+        },
+        "body": ""
+      }
+    },
+    {
+      "step": "subfinder_response",
+      "timestamp": "2025-11-05T02:30:57.719528",
+      "type": "response",
+      "data": {
+        "timestamp": "2025-11-05T02:30:57.719489",
+        "tool": "subfinder",
+        "status_code": 200,
+        "headers": {},
+        "body_size": 919,
+        "body_preview": ""
+      }
+    },
+    {
+      "step": "nmap_request",
+      "timestamp": "2025-11-05T02:30:57.719606",
+      "type": "request",
+      "data": {
+        "timestamp": "2025-11-05T02:30:57.719587",
+        "tool": "nmap",
+        "method": "SCAN",
+        "url": "www.nba.com",
+        "headers": {
+          "tool": "nmap"
+        },
+        "body": ""
+      }
+    },
+    {
+      "step": "nmap_response",
+      "timestamp": "2025-11-05T02:31:19.398802",
+      "type": "response",
+      "data": {
+        "timestamp": "2025-11-05T02:31:19.398793",
+        "tool": "nmap",
+        "status_code": 200,
+        "headers": {},
+        "body_size": 2,
+        "body_preview": ""
+      }
+    },
+    {
+      "step": "nikto_request",
+      "timestamp": "2025-11-05T02:31:19.398816",
+      "type": "request",
+      "data": {
+        "timestamp": "2025-11-05T02:31:19.398814",
+        "tool": "nikto",
+        "method": "SCAN",
+        "url": "www.nba.com",
+        "headers": {
+          "tool": "nikto"
+        },
+        "body": ""
+      }
+    },
+    {
+      "step": "nikto_response",
+      "timestamp": "2025-11-05T02:33:22.758958",
+      "type": "response",
+      "data": {
+        "timestamp": "2025-11-05T02:33:22.758938",
+        "tool": "nikto",
+        "status_code": 200,
+        "headers": {},
+        "body_size": 3,
+        "body_preview": ""
+      }
+    },
+    {
+      "step": "gobuster_request",
+      "timestamp": "2025-11-05T02:33:22.759109",
+      "type": "request",
+      "data": {
+        "timestamp": "2025-11-05T02:33:22.759103",
+        "tool": "gobuster",
+        "method": "SCAN",
+        "url": "www.nba.com",
+        "headers": {
+          "tool": "gobuster"
+        },
+        "body": ""
+      }
+    },
+    {
+      "step": "gobuster_response",
+      "timestamp": "2025-11-05T02:33:42.639250",
+      "type": "response",
+      "data": {
+        "timestamp": "2025-11-05T02:33:42.639240",
+        "tool": "gobuster",
+        "status_code": 200,
+        "headers": {},
+        "body_size": 2,
+        "body_preview": ""
+      }
+    },
+    {
+      "step": "nslookupdns_request",
+      "timestamp": "2025-11-05T02:33:42.639267",
+      "type": "request",
+      "data": {
+        "timestamp": "2025-11-05T02:33:42.639263",
+        "tool": "nslookupdns",
+        "method": "SCAN",
+        "url": "www.nba.com",
+        "headers": {
+          "tool": "nslookupdns"
+        },
+        "body": ""
+      }
+    },
+    {
+      "step": "nslookupdns_response",
+      "timestamp": "2025-11-05T02:33:44.236787",
+      "type": "response",
+      "data": {
+        "timestamp": "2025-11-05T02:33:44.236764",
+        "tool": "nslookupdns",
+        "status_code": 200,
+        "headers": {},
+        "body_size": 0,
+        "body_preview": ""
+      }
+    },
+    {
+      "step": "traceroute_request",
+      "timestamp": "2025-11-05T02:33:44.236824",
+      "type": "request",
+      "data": {
+        "timestamp": "2025-11-05T02:33:44.236816",
+        "tool": "traceroute",
+        "method": "SCAN",
+        "url": "www.nba.com",
+        "headers": {
+          "tool": "traceroute"
+        },
+        "body": ""
+      }
+    },
+    {
+      "step": "traceroute_response",
+      "timestamp": "2025-11-05T02:34:09.369465",
+      "type": "response",
+      "data": {
+        "timestamp": "2025-11-05T02:34:09.369451",
+        "tool": "traceroute",
+        "status_code": 200,
+        "headers": {},
+        "body_size": 0,
+        "body_preview": ""
+      }
+    },
+    {
+      "step": "wappalyzer_request",
+      "timestamp": "2025-11-05T02:34:09.369488",
+      "type": "request",
+      "data": {
+        "timestamp": "2025-11-05T02:34:09.369484",
+        "tool": "wappalyzer",
+        "method": "SCAN",
+        "url": "www.nba.com",
+        "headers": {
+          "tool": "wappalyzer"
+        },
+        "body": ""
+      }
+    },
+    {
+      "step": "wappalyzer_response",
+      "timestamp": "2025-11-05T02:34:13.622009",
+      "type": "response",
+      "data": {
+        "timestamp": "2025-11-05T02:34:13.622000",
+        "tool": "wappalyzer",
+        "status_code": 200,
+        "headers": {},
+        "body_size": 0,
+        "body_preview": ""
+      }
+    }
+  ],
+  "requests": [
+    {
+      "timestamp": "2025-11-05T02:30:32.175630",
+      "tool": "subfinder",
+      "method": "SCAN",
+      "url": "www.nba.com",
+      "headers": {
+        "tool": "subfinder"
+      },
+      "body": ""
+    },
+    {
+      "timestamp": "2025-11-05T02:30:57.719587",
+      "tool": "nmap",
+      "method": "SCAN",
+      "url": "www.nba.com",
+      "headers": {
+        "tool": "nmap"
+      },
+      "body": ""
+    },
+    {
+      "timestamp": "2025-11-05T02:31:19.398814",
+      "tool": "nikto",
+      "method": "SCAN",
+      "url": "www.nba.com",
+      "headers": {
+        "tool": "nikto"
+      },
+      "body": ""
+    },
+    {
+      "timestamp": "2025-11-05T02:33:22.759103",
+      "tool": "gobuster",
+      "method": "SCAN",
+      "url": "www.nba.com",
+      "headers": {
+        "tool": "gobuster"
+      },
+      "body": ""
+    },
+    {
+      "timestamp": "2025-11-05T02:33:42.639263",
+      "tool": "nslookupdns",
+      "method": "SCAN",
+      "url": "www.nba.com",
+      "headers": {
+        "tool": "nslookupdns"
+      },
+      "body": ""
+    },
+    {
+      "timestamp": "2025-11-05T02:33:44.236816",
+      "tool": "traceroute",
+      "method": "SCAN",
+      "url": "www.nba.com",
+      "headers": {
+        "tool": "traceroute"
+      },
+      "body": ""
+    },
+    {
+      "timestamp": "2025-11-05T02:34:09.369484",
+      "tool": "wappalyzer",
+      "method": "SCAN",
+      "url": "www.nba.com",
+      "headers": {
+        "tool": "wappalyzer"
+      },
+      "body": ""
+    }
+  ],
+  "responses": [
+    {
+      "timestamp": "2025-11-05T02:30:57.719489",
+      "tool": "subfinder",
+      "status_code": 200,
+      "headers": {},
+      "body_size": 919,
+      "body_preview": ""
+    },
+    {
+      "timestamp": "2025-11-05T02:31:19.398793",
+      "tool": "nmap",
+      "status_code": 200,
+      "headers": {},
+      "body_size": 2,
+      "body_preview": ""
+    },
+    {
+      "timestamp": "2025-11-05T02:33:22.758938",
+      "tool": "nikto",
+      "status_code": 200,
+      "headers": {},
+      "body_size": 3,
+      "body_preview": ""
+    },
+    {
+      "timestamp": "2025-11-05T02:33:42.639240",
+      "tool": "gobuster",
+      "status_code": 200,
+      "headers": {},
+      "body_size": 2,
+      "body_preview": ""
+    },
+    {
+      "timestamp": "2025-11-05T02:33:44.236764",
+      "tool": "nslookupdns",
+      "status_code": 200,
+      "headers": {},
+      "body_size": 0,
+      "body_preview": ""
+    },
+    {
+      "timestamp": "2025-11-05T02:34:09.369451",
+      "tool": "traceroute",
+      "status_code": 200,
+      "headers": {},
+      "body_size": 0,
+      "body_preview": ""
+    },
+    {
+      "timestamp": "2025-11-05T02:34:13.622000",
+      "tool": "wappalyzer",
+      "status_code": 200,
+      "headers": {},
+      "body_size": 0,
+      "body_preview": ""
+    }
+  ],
+  "end_time": "2025-11-05T02:34:13.622024"
+}

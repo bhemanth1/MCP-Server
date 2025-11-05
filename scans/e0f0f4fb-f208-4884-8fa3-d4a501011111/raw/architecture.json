@@ -1,0 +1,119 @@
+{
+  "scan_id": "e0f0f4fb-f208-4884-8fa3-d4a501011111",
+  "start_time": "2025-11-04T17:39:22.661968",
+  "tools": [
+    {
+      "name": "nmap",
+      "start_time": "2025-11-04T17:39:22.672092",
+      "status": "failed",
+      "end_time": "2025-11-04T17:39:22.682523",
+      "findings_count": 0
+    },
+    {
+      "name": "subfinder",
+      "start_time": "2025-11-04T17:39:22.682719",
+      "status": "completed",
+      "end_time": "2025-11-04T17:39:26.958173",
+      "findings_count": 21
+    }
+  ],
+  "flow": [
+    {
+      "step": "nmap_request",
+      "timestamp": "2025-11-04T17:39:22.672115",
+      "type": "request",
+      "data": {
+        "timestamp": "2025-11-04T17:39:22.672107",
+        "tool": "nmap",
+        "method": "SCAN",
+        "url": "woxsen.edu.in",
+        "headers": {
+          "tool": "nmap"
+        },
+        "body": ""
+      }
+    },
+    {
+      "step": "nmap_response",
+      "timestamp": "2025-11-04T17:39:22.682517",
+      "type": "response",
+      "data": {
+        "timestamp": "2025-11-04T17:39:22.682499",
+        "tool": "nmap",
+        "status_code": 500,
+        "headers": {},
+        "body_size": 32,
+        "body_preview": "maximum recursion depth exceeded"
+      }
+    },
+    {
+      "step": "subfinder_request",
+      "timestamp": "2025-11-04T17:39:22.682739",
+      "type": "request",
+      "data": {
+        "timestamp": "2025-11-04T17:39:22.682732",
+        "tool": "subfinder",
+        "method": "SCAN",
+        "url": "woxsen.edu.in",
+        "headers": {
+          "tool": "subfinder"
+        },
+        "body": ""
+      }
+    },
+    {
+      "step": "subfinder_response",
+      "timestamp": "2025-11-04T17:39:26.958156",
+      "type": "response",
+      "data": {
+        "timestamp": "2025-11-04T17:39:26.958119",
+        "tool": "subfinder",
+        "status_code": 200,
+        "headers": {},
+        "body_size": 21,
+        "body_preview": ""
+      }
+    }
+  ],
+  "requests": [
+    {
+      "timestamp": "2025-11-04T17:39:22.672107",
+      "tool": "nmap",
+      "method": "SCAN",
+      "url": "woxsen.edu.in",
+      "headers": {
+        "tool": "nmap"
+      },
+      "body": ""
+    },
+    {
+      "timestamp": "2025-11-04T17:39:22.682732",
+      "tool": "subfinder",
+      "method": "SCAN",
+      "url": "woxsen.edu.in",
+      "headers": {
+        "tool": "subfinder"
+      },
+      "body": ""
+    }
+  ],
+  "responses": [
+    {
+      "timestamp": "2025-11-04T17:39:22.682499",
+      "tool": "nmap",
+      "status_code": 500,
+      "headers": {},
+      "body_size": 32,
+      "body_preview": "maximum recursion depth exceeded"
+    },
+    {
+      "timestamp": "2025-11-04T17:39:26.958119",
+      "tool": "subfinder",
+      "status_code": 200,
+      "headers": {},
+      "body_size": 21,
+      "body_preview": ""
+    }
+  ],
+  "end_time": "2025-11-04T17:39:26.958207"
+}

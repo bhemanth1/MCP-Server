@@ -1,0 +1,7 @@
+{
+  "server": "Apache-Coyote/1.1",
+  "set-cookie": "JSESSIONID=F87D4421727E85D5C30923B12895671A; Path=/; Secure; HttpOnly",
+  "content-type": "text/html;charset=ISO-8859-1",
+  "transfer-encoding": "chunked",
+  "date": "Sun, 02 Nov 2025 13:24:03 GMT"
+}

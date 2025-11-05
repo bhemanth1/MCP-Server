@@ -111,8 +111,12 @@ def safe_run(args, timeout=120, cwd=None):
 
 def run_and_parse(target: str, raw_dir: str) -> dict:
     import socket
+    from urllib.parse import urlparse
     
-    domain = target.split('/')[-1].split(':')[0]
+    # Robustly extract domain from either a plain domain or a full URL
+    parsed = urlparse(target if '://' in target else f"https://{target}")
+    host = parsed.netloc or parsed.path
+    domain = host.split(':')[0].replace('www.', '')
     
     txt_path = os.path.join(raw_dir, "subfinder.txt")
     args = ["subfinder", "-d", domain, "-silent", "-o", txt_path]
@@ -146,12 +150,20 @@ def run_and_parse(target: str, raw_dir: str) -> dict:
         except:
             pass
     
+    # Compose subdomain details (url + ip)
+    scheme = "https"
+    subdomain_details = [
+        {"subdomain": s, "ip": subdomain_ips.get(s), "url": f"{scheme}://{s}"}
+        for s in subdomains
+    ]
+
     findings = {
         "success": True,
         "error": None,
         "main_domain_ip": main_domain_ip,
         "subdomain_ips": subdomain_ips,
         "subdomains": subdomains,
+        "subdomain_details": subdomain_details,
         "count": len(subdomains),
         "method_used": "subfinder" if rc == 0 else "python_dns"
     }

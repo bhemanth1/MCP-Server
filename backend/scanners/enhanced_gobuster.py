@@ -164,4 +164,3 @@ def run_and_parse(target: str, raw_dir: str) -> dict:
         findings["success"] = False
     
     return findings
-

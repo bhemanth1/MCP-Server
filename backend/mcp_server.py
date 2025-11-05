@@ -9,7 +9,6 @@ from datetime import datetime
 from concurrent.futures import ThreadPoolExecutor
 from pathlib import Path
 from typing import Dict, Any, List, Optional
-
 from fastapi import FastAPI, HTTPException, Query
 from fastapi.responses import HTMLResponse, FileResponse, JSONResponse
 from fastapi.middleware.cors import CORSMiddleware
@@ -17,9 +16,8 @@ from pydantic import BaseModel
 from jinja2 import Template
 from playwright.async_api import async_playwright
 
-# ----------------------------------------------------------------------
+
 # 1. CONFIG & DB (unchanged)
-# ----------------------------------------------------------------------
 SCAN_ROOT = os.path.abspath("../scans")
 os.makedirs(SCAN_ROOT, exist_ok=True)
 DB_PATH = os.path.join(SCAN_ROOT, "mcp.db")
@@ -42,9 +40,8 @@ def init_db():
     conn.close()
 init_db()
 
-# ----------------------------------------------------------------------
+
 # 2. TOOL REGISTRY (unchanged)
-# ----------------------------------------------------------------------
 TOOLS: dict[str, callable] = {}
 # In TOOLS registry section
 tool_modules = [
@@ -56,6 +53,7 @@ tool_modules = [
     ("traceroute",  "scanners.traceroute"),
     ("playwright",  "scanners.playwright_scanner"),  # Advanced browser scanning
     ("selenium",    "scanners.selenium_scanner"),    # Browser automation
+    ("wappalyzer",  "scanners.wappalyzer_scanner"),  # Technology fingerprinting
 ]
 
 for name, mod_path in tool_modules:
@@ -66,9 +64,7 @@ for name, mod_path in tool_modules:
     except Exception as e:
         print(f"[!] Could not load {name}: {e}")
 
-# ----------------------------------------------------------------------
 # 3. FASTAPI APP (enhanced with CORS)
-# ----------------------------------------------------------------------
 app = FastAPI(
     title="MCP Scanner API",
     description="Multi-tool Cybersecurity Reconnaissance Platform",
@@ -100,9 +96,8 @@ class ScanStatus(BaseModel):
     updated_at: str
     meta: Dict[str, Any]
 
-# ----------------------------------------------------------------------
 # 4. DB HELPERS (unchanged)
-# ----------------------------------------------------------------------
+
 def save_scan_record(scan_id: str, **kwargs):
     conn = sqlite3.connect(DB_PATH)
     c = conn.cursor()
@@ -138,9 +133,8 @@ def save_scan_record(scan_id: str, **kwargs):
     conn.commit()
     conn.close()
 
-# ----------------------------------------------------------------------
 # 5. UTILITIES IMPORT
-# ----------------------------------------------------------------------
+
 try:
     from utils.vulnerability_db import get_mitigations_for_scan
     from utils.tool_checker import check_all_tools
@@ -151,9 +145,7 @@ except ImportError:
     def check_all_tools():
         return {}
 
-# ----------------------------------------------------------------------
 # 6. WORKER (enhanced: compute Risk Index with progress tracking)
-# ----------------------------------------------------------------------
 def worker_run_scan(scan_id: str, target: str, tools: list[str], options: Dict[str, Any] = None):
     from scanners.scan_architecture import ScanArchitecture
     
@@ -278,9 +270,9 @@ def worker_run_scan(scan_id: str, target: str, tools: list[str], options: Dict[s
                            "mitigations": mitigations,
                            "architecture": architecture})
 
-# ----------------------------------------------------------------------
+
 # 6. ENDPOINTS (minor: validate URL-like target)
-# ----------------------------------------------------------------------
+
 @app.post("/start_scan")
 async def start_scan(req: ScanRequest):
     # Enhanced URL sanitization
@@ -398,19 +390,59 @@ async def export_csv(scan_id: str):
                             writer.writerow([tool_name, "Open Port", 
                                             f"{port.get('port')}/{port.get('protocol')} - {port.get('service')}"])
                 elif "subdomains" in tool_data:  # subfinder
-                    for subdomain in tool_data.get("subdomains", [])[:100]:  # Limit to 100
-                        writer.writerow([tool_name, "Subdomain", subdomain])
+                    details_list = tool_data.get("subdomain_details") or []
+                    if details_list:
+                        for item in details_list[:100]:
+                            sd = item.get("subdomain") or ""
+                            ip = item.get("ip") or ""
+                            url = item.get("url") or ""
+                            details = f"{sd}"
+                            if ip:
+                                details += f" | IP: {ip}"
+                            if url:
+                                details += f" | URL: {url}"
+                            writer.writerow([tool_name, "Subdomain", details])
+                    else:
+                        for subdomain in tool_data.get("subdomains", [])[:100]:  # Limit to 100
+                            ip = tool_data.get("subdomain_ips", {}).get(subdomain)
+                            details = subdomain
+                            if ip:
+                                details += f" | IP: {ip}"
+                            writer.writerow([tool_name, "Subdomain", details])
                 elif "subdomains_found" in tool_data:  # playwright/selenium
                     for subdomain in tool_data.get("subdomains_found", [])[:100]:
                         writer.writerow([tool_name, "Subdomain", subdomain])
                 elif "vulnerabilities" in tool_data:  # nikto
                     for vuln in tool_data.get("vulnerabilities", [])[:100]:
-                        writer.writerow([tool_name, "Vulnerability", 
-                                        vuln.get("url", "") + " - " + str(vuln.get("description", ""))])
+                        details = vuln.get("url", "") + " - " + str(vuln.get("description", ""))
+                        sev = vuln.get("severity")
+                        cvss = vuln.get("cvss")
+                        if sev:
+                            details += f" | Severity: {sev}"
+                        if cvss is not None:
+                            details += f" | CVSS: {cvss}"
+                        writer.writerow([tool_name, "Vulnerability", details])
                 elif "directories" in tool_data:  # gobuster
                     for dir_entry in tool_data.get("directories", [])[:100]:
                         writer.writerow([tool_name, "Directory", 
                                         f"{dir_entry.get('path', '')} - Status: {dir_entry.get('status', '')}"])
+                elif "technologies" in tool_data:  # wappalyzer
+                    for tech in tool_data.get("technologies", [])[:100]:
+                        name = tech.get("name")
+                        cat = tech.get("category")
+                        ver = tech.get("version") or ""
+                        latest = tech.get("latest") or ""
+                        outdated = "Outdated" if tech.get("outdated") else "Up-to-date"
+                        cvss = tech.get("cvss")
+                        details = f"{name} ({cat})"
+                        if ver:
+                            details += f" | Version: {ver}"
+                        if latest:
+                            details += f" | Latest: {latest}"
+                        details += f" | Status: {outdated}"
+                        if cvss is not None:
+                            details += f" | CVSS: {cvss}"
+                        writer.writerow([tool_name, "Technology", details])
     
     return FileResponse(csv_path, media_type="text/csv", 
                        filename=f"MCP_Export_{scan_id[:8]}.csv")
@@ -419,8 +451,10 @@ async def export_csv(scan_id: str):
 async def get_available_tools():
     """Get list of available scanning tools"""
     tools_status = check_all_tools()
+    # Hide playwright and selenium in the advertised tools list (logic integrated elsewhere)
+    visible_tools = [t for t in TOOLS.keys() if t not in ("playwright", "selenium")]
     return {
-        "tools": list(TOOLS.keys()),
+        "tools": visible_tools,
         "descriptions": {
             "nmap": "Network mapper - Port scanning and service detection",
             "subfinder": "Subdomain discovery tool",
@@ -428,8 +462,7 @@ async def get_available_tools():
             "gobuster": "Directory/file brute-forcer",
             "nslookupdns": "DNS lookup and resolution",
             "traceroute": "Network path tracing",
-            "playwright": "Advanced browser scanning - Handles pop-ups, crawls all data",
-            "selenium": "Browser automation - Full page rendering, pop-up handling"
+            "wappalyzer": "Technology fingerprinting (stack, versions, outdated)"
         },
         "status": tools_status
     }
@@ -499,6 +532,27 @@ REPORT_TEMPLATE_STR = """
 
   <h2>Sub-domains Discovered (Subfinder)</h2>
   <div class="chart" id="subdomainsChart"></div>
+  {% if meta.findings.subfinder and meta.findings.subfinder.subdomain_details %}
+  <h3>Sub-domain Details</h3>
+  <table style="width:100%;border-collapse:collapse;margin:10px 0;font-size:0.9em;">
+    <thead>
+      <tr style="background:#f5f5f5;">
+        <th style="padding:8px;text-align:left;">Subdomain</th>
+        <th style="padding:8px;text-align:left;">IP</th>
+        <th style="padding:8px;text-align:left;">URL</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for item in meta.findings.subfinder.subdomain_details[:20] %}
+      <tr style="border-bottom:1px solid #eee;">
+        <td style="padding:8px;">{{ item.subdomain }}</td>
+        <td style="padding:8px;">{{ item.ip or '-' }}</td>
+        <td style="padding:8px;"><a href="{{ item.url }}" target="_blank">{{ item.url }}</a></td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  {% endif %}
 </div>
 
 <!-- PAGE 3 – Nikto & Gobuster -->
@@ -506,9 +560,54 @@ REPORT_TEMPLATE_STR = """
   <div class="header">MCP Scan Intelligence Report – {{ target }} | Page 3</div>
   <h2>Known Vulnerabilities (Nikto)</h2>
   <div class="chart" id="niktoHeatmap"></div>
+  {% if meta.findings.nikto and meta.findings.nikto.url_ip_map %}
+  <h3>Discovered URL → IP</h3>
+  <table style="width:100%;border-collapse:collapse;margin:10px 0;font-size:0.9em;">
+    <thead>
+      <tr style="background:#f5f5f5;">
+        <th style="padding:8px;text-align:left;">URL</th>
+        <th style="padding:8px;text-align:left;">IP</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for u, ip in (meta.findings.nikto.url_ip_map.items()|list)[:20] %}
+      <tr style="border-bottom:1px solid #eee;">
+        <td style="padding:8px;word-break:break-all;"><a href="{{ u }}" target="_blank">{{ u }}</a></td>
+        <td style="padding:8px;">{{ ip }}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  {% endif %}
 
   <h2>Directory Discovery (Gobuster)</h2>
   <div class="chart" id="gobusterPie"></div>
+  {% if meta.findings.wappalyzer and meta.findings.wappalyzer.technologies %}
+  <h2>Technologies Detected (Wappalyzer)</h2>
+  <div class="chart" id="techBar"></div>
+  <table style="width:100%;border-collapse:collapse;margin:10px 0;font-size:0.9em;">
+    <thead>
+      <tr style="background:#f5f5f5;">
+        <th style="padding:8px;text-align:left;">Technology</th>
+        <th style="padding:8px;text-align:left;">Category</th>
+        <th style="padding:8px;text-align:left;">Version</th>
+        <th style="padding:8px;text-align:left;">Latest</th>
+        <th style="padding:8px;text-align:left;">Status</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for t in meta.findings.wappalyzer.technologies[:20] %}
+      <tr style="border-bottom:1px solid #eee;">
+        <td style="padding:8px;">{{ t.name }}</td>
+        <td style="padding:8px;">{{ t.category }}</td>
+        <td style="padding:8px;">{{ t.version or '-' }}</td>
+        <td style="padding:8px;">{{ t.latest or '-' }}</td>
+        <td style="padding:8px; color: {{ '#d9534f' if t.outdated else '#28a745' }};">{{ 'Outdated' if t.outdated else 'Up-to-date' }}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  {% endif %}
 </div>
 
 <!-- PAGE 4 – Mitigation Steps -->
@@ -585,7 +684,55 @@ REPORT_TEMPLATE_STR = """
   
   <div style="margin-top:30px;">
     <h2>Network Path (Traceroute)</h2>
-    <div class="chart" id="tracerouteSankey"></div>
+    {% if meta.findings.traceroute and meta.findings.traceroute.hops %}
+    <table style="width:100%;border-collapse:collapse;margin:10px 0;font-size:0.9em;">
+      <thead>
+        <tr style="background:#f5f5f5;">
+          <th style="padding:8px;text-align:left;">Hop</th>
+          <th style="padding:8px;text-align:left;">IP</th>
+          <th style="padding:8px;text-align:left;">RTT #1</th>
+          <th style="padding:8px;text-align:left;">RTT #2</th>
+          <th style="padding:8px;text-align:left;">RTT #3</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for h in meta.findings.traceroute.hops[:30] %}
+        <tr style="border-bottom:1px solid #eee;">
+          <td style="padding:8px;">{{ h.hop }}</td>
+          <td style="padding:8px;">{{ h.ip or '-' }}</td>
+          <td style="padding:8px;">{{ (h.rtts[0] if h.rtts|length > 0 else '-') }}</td>
+          <td style="padding:8px;">{{ (h.rtts[1] if h.rtts|length > 1 else '-') }}</td>
+          <td style="padding:8px;">{{ (h.rtts[2] if h.rtts|length > 2 else '-') }}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    {% endif %}
+    {% if meta.findings.nslookupdns and meta.findings.nslookupdns.server_locations %}
+    <h3>Server Locations (nslookup)</h3>
+    <table style="width:100%;border-collapse:collapse;margin:10px 0;font-size:0.9em;">
+      <thead>
+        <tr style="background:#f5f5f5;">
+          <th style="padding:8px;text-align:left;">IP</th>
+          <th style="padding:8px;text-align:left;">Country</th>
+          <th style="padding:8px;text-align:left;">Region</th>
+          <th style="padding:8px;text-align:left;">City</th>
+          <th style="padding:8px;text-align:left;">ISP</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for loc in meta.findings.nslookupdns.server_locations[:10] %}
+        <tr style="border-bottom:1px solid #eee;">
+          <td style="padding:8px;">{{ loc.ip }}</td>
+          <td style="padding:8px;">{{ loc.country }}</td>
+          <td style="padding:8px;">{{ loc.region }}</td>
+          <td style="padding:8px;">{{ loc.city }}</td>
+          <td style="padding:8px;">{{ loc.isp }}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    {% endif %}
   </div>
 </div>
 
@@ -635,18 +782,18 @@ Plotly.newPlot('riskGauge', [gauge], {responsive:true});
     {% set _ = services.update({p.service: services.get(p.service,0)+1}) %}
   {% endfor %}
 {% endfor %}
-const portLabels = {{ list(services.keys())|tojson }};
-const portValues = {{ list(services.values())|tojson }};
+const portLabels = {{ services.keys()|list|tojson }};
+const portValues = {{ services.values()|list|tojson }};
 const portsData = [{ x: portLabels, y: portValues, type:'bar', marker:{color:'#0078d4'} }];
 Plotly.newPlot('portsChart', portsData, {title:'Open Ports per Service', responsive:true});
 
 /* ---------- 3. Sub-domains (top 20) ---------- */
-const subdomains = {{ meta.findings.subfinder.subdomains|default([])|list|slice(":20")|tojson }};
+const subdomains = {{ meta.findings.subfinder.subdomains|default([])|list|tojson }}.slice(0, 20);
 const subData = [{ y: subdomains, type:'bar', orientation:'h', marker:{color:'#17a2b8'} }];
 Plotly.newPlot('subdomainsChart', subData, {title:'Top 20 Sub-domains', responsive:true});
 
 /* ---------- 4. Nikto Heat-map (first 15) ---------- */
-const nikto = {{ meta.findings.nikto.vulnerabilities|default([])|list|slice(":15")|tojson }};
+const nikto = {{ meta.findings.nikto.vulnerabilities|default([])|list|tojson }}.slice(0, 15);
 const heatX = nikto.map(v=>v.url.split('/').slice(0,3).join('/'));   // shorten URL
 const heatY = nikto.map(v=>v.risk || 'unknown');
 const heatZ = nikto.map(v=>1);
@@ -659,18 +806,25 @@ Plotly.newPlot('niktoHeatmap', heatData, {title:'Vulnerability Heat-map (Nikto)'
 {% for d in meta.findings.gobuster.directories|default([]) %}
   {% set _ = status_counts.update({d.status: status_counts.get(d.status,0)+1}) %}
 {% endfor %}
-const pieLabels = {{ list(status_counts.keys())|tojson }};
-const pieValues = {{ list(status_counts.values())|tojson }};
+const pieLabels = {{ status_counts.keys()|list|tojson }};
+const pieValues = {{ status_counts.values()|list|tojson }};
 const pieData = [{ labels: pieLabels, values: pieValues, type:'pie' }];
 Plotly.newPlot('gobusterPie', pieData, {title:'Directory Status Codes (Gobuster)', responsive:true});
 
-/* ---------- 6. Traceroute Sankey ---------- */
-const hops = {{ meta.findings.traceroute.hops|default([])|tojson }};
-const sankeyLabels = hops.map((h,i)=>`Hop ${i+1}${h.ip?': '+h.ip:''}`);
-const source = hops.slice(0,-1).map((_,i)=>i);
-const target = hops.slice(1).map((_,i)=>i+1);
-const sankeyData = [{ type:'sankey', node:{ label: sankeyLabels }, link:{ source:source, target:target, value: hops.map(()=>1) } }];
-Plotly.newPlot('tracerouteSankey', sankeyData, {title:'Network Path (Traceroute)', responsive:true});
+/* (Traceroute chart removed; now shown as table) */
+
+/* ---------- 7. Technologies Bar ---------- */
+{% set tech_counts = {} %}
+{% for t in meta.findings.wappalyzer.technologies|default([]) %}
+  {% set cat = t.category or 'Other' %}
+  {% set _ = tech_counts.update({cat: tech_counts.get(cat,0)+1}) %}
+{% endfor %}
+const techLabels = {{ tech_counts.keys()|list|tojson }};
+const techValues = {{ tech_counts.values()|list|tojson }};
+if (document.getElementById('techBar')) {
+  const techData = [{ x: techLabels, y: techValues, type: 'bar', marker:{color:'#6f42c1'} }];
+  Plotly.newPlot('techBar', techData, {title:'Technologies by Category', responsive:true});
+}
 </script>
 </body>
 </html>
@@ -692,6 +846,16 @@ async def get_report(scan_id: str):
     # Ensure findings structure exists
     if "findings" not in meta:
         meta["findings"] = {}
+    # Sanitize meta to remove any non-JSON-serializable objects (e.g., generators)
+    def _default(o):
+        try:
+            return list(o)
+        except Exception:
+            return str(o)
+    try:
+        meta = json.loads(json.dumps(meta, default=_default))
+    except Exception:
+        pass
     
     html = REPORT_TEMPLATE.render(
         scan_id=row[0], target=row[1], tools=json.loads(row[2]), meta=meta, created_at=row[4], risk_index=risk_index

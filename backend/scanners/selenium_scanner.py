@@ -33,8 +33,12 @@ def selenium_scan(target: str, raw_dir: str) -> dict:
         "images": [],
         "links": [],
         "subdomains_found": [],
+        "subdomain_details": [],
         "popups_handled": [],
-        "screenshot_path": ""
+        "screenshot_path": "",
+        "js_libraries": [],
+        "outdated_js": [],
+        "traceroute": {}
     }
     
     try:
@@ -52,6 +56,7 @@ def selenium_scan(target: str, raw_dir: str) -> dict:
         chrome_options.add_argument('--disable-blink-features=AutomationControlled')
         chrome_options.add_experimental_option("excludeSwitches", ["enable-automation"])
         chrome_options.add_experimental_option('useAutomationExtension', False)
+        chrome_options.add_argument('--ignore-certificate-errors')
         
         # Handle pop-ups - accept all alerts
         prefs = {
@@ -181,9 +186,84 @@ def selenium_scan(target: str, raw_dir: str) -> dict:
                         pass
             
             findings["links"] = links_data
+            # Resolve IPs and compose details
+            import socket
+            subdomain_details = []
+            for sd in list(subdomains_found)[:100]:
+                ip = None
+                try:
+                    ip = socket.gethostbyname(sd)
+                except:
+                    pass
+                scheme = urlparse(target).scheme or 'https'
+                subdomain_details.append({"subdomain": sd, "ip": ip, "url": f"{scheme}://{sd}"})
             findings["subdomains_found"] = list(subdomains_found)
+            findings["subdomain_details"] = subdomain_details
             findings["popups_handled"] = popups_handled
             
+            # Detect JS libraries and outdated versions
+            script_tags = driver.find_elements(By.TAG_NAME, "script")
+            scripts = [s.get_attribute("src") for s in script_tags if s.get_attribute("src")]
+            import re
+            KNOWN = {
+                "jquery": "3.7.1",
+                "angular": "1.8.3",
+                "vue": "3.4.0",
+                "react": "18.3.1",
+                "bootstrap": "5.3.3",
+                "lodash": "4.17.21",
+                "moment": "2.30.1",
+                "underscore": "1.13.6",
+                "d3": "7.9.0",
+                "three": "0.169.0"
+            }
+            def parse_lib(url: str):
+                name = None; ver = None
+                fname = url.split('/')[-1]
+                candidates = [
+                    ("jquery", r"jquery[-.](\d+\.\d+\.\d+)"),
+                    ("angular", r"angular[-.](\d+\.\d+\.\d+)"),
+                    ("vue", r"vue[-.](\d+\.\d+\.\d+)"),
+                    ("react", r"react[-.](\d+\.\d+\.\d+)"),
+                    ("bootstrap", r"bootstrap[-.](\d+\.\d+\.\d+)"),
+                    ("lodash", r"lodash[-.](\d+\.\d+\.\d+)"),
+                    ("moment", r"moment[-.](\d+\.\d+\.\d+)"),
+                    ("underscore", r"underscore[-.](\d+\.\d+\.\d+)"),
+                    ("d3", r"d3[-.](\d+\.\d+\.\d+)"),
+                    ("three", r"three[-.](\d+\.\d+)")
+                ]
+                for n, rx in candidates:
+                    m = re.search(rx, fname, re.IGNORECASE)
+                    if m:
+                        return n, m.group(1)
+                return name, ver
+            def cmp_ver(a, b):
+                try:
+                    ap = [int(x) for x in a.split('.')]
+                    bp = [int(x) for x in b.split('.')]
+                    while len(ap) < len(bp): ap.append(0)
+                    while len(bp) < len(ap): bp.append(0)
+                    return (ap > bp) - (ap < bp)
+                except:
+                    return 0
+            js_libs = []
+            outdated_js = []
+            for s in scripts:
+                n, v = parse_lib(s)
+                if n:
+                    latest = KNOWN.get(n)
+                    js_libs.append({"name": n, "version": v, "latest": latest, "src": s})
+                    if v and latest and cmp_ver(v, latest) < 0:
+                        outdated_js.append({
+                            "library": n,
+                            "version": v,
+                            "latest": latest,
+                            "severity": "high",
+                            "cvss": 7.5
+                        })
+            findings["js_libraries"] = js_libs
+            findings["outdated_js"] = outdated_js
+
         except Exception as e:
             findings["error"] = f"Selenium navigation error: {str(e)}"
         finally:
@@ -193,6 +273,15 @@ def selenium_scan(target: str, raw_dir: str) -> dict:
         findings["error"] = "Selenium not installed. Install: pip install selenium webdriver-manager"
     except Exception as e:
         findings["error"] = f"Selenium scan error: {str(e)}"
+    # Add traceroute
+    try:
+        from scanners.traceroute import run_and_parse as tr_run
+        base_host = urlparse(target).netloc or urlparse(f"https://{target}").netloc
+        base_host = base_host.split(':')[0]
+        tr = tr_run(base_host, raw_dir)
+        findings["traceroute"] = {"hops": tr.get("hops", []), "hop_count": tr.get("hop_count", 0)}
+    except Exception:
+        pass
     
     return findings
 

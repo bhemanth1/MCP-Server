@@ -55,7 +55,8 @@ async def playwright_scan(target: str, raw_dir: str) -> dict:
                 viewport={'width': 1920, 'height': 1080},
                 user_agent='Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
                 java_script_enabled=True,
-                accept_downloads=True
+                accept_downloads=True,
+                ignore_https_errors=True
             )
             
             # Handle pop-ups and dialogs
@@ -224,7 +225,19 @@ async def playwright_scan(target: str, raw_dir: str) -> dict:
                     except:
                         pass
                 
+                # Resolve IPs for subdomains and prepare details
+                import socket
+                subdomain_details = []
+                for sd in list(subdomains_found)[:100]:
+                    ip = None
+                    try:
+                        ip = socket.gethostbyname(sd)
+                    except:
+                        pass
+                    scheme = urlparse(target).scheme or 'https'
+                    subdomain_details.append({"subdomain": sd, "ip": ip, "url": f"{scheme}://{sd}"})
                 findings["subdomains_found"] = list(subdomains_found)
+                findings["subdomain_details"] = subdomain_details
                 findings["links"] = links_data[:200]  # Limit to 200
                 
                 # Extract forms
@@ -259,6 +272,67 @@ async def playwright_scan(target: str, raw_dir: str) -> dict:
                     }
                 """)
                 findings["scripts"] = scripts
+                # Basic JS library version parsing and outdated detection
+                import re
+                KNOWN = {
+                    "jquery": "3.7.1",
+                    "angular": "1.8.3",
+                    "vue": "3.4.0",
+                    "react": "18.3.1",
+                    "bootstrap": "5.3.3",
+                    "lodash": "4.17.21",
+                    "moment": "2.30.1",
+                    "underscore": "1.13.6",
+                    "d3": "7.9.0",
+                    "three": "0.169.0"
+                }
+                def parse_lib(url: str):
+                    name = None; ver = None
+                    fname = url.split('/')[-1]
+                    candidates = [
+                        ("jquery", r"jquery[-.](\d+\.\d+\.\d+)"),
+                        ("angular", r"angular[-.](\d+\.\d+\.\d+)"),
+                        ("vue", r"vue[-.](\d+\.\d+\.\d+)"),
+                        ("react", r"react[-.](\d+\.\d+\.\d+)"),
+                        ("bootstrap", r"bootstrap[-.](\d+\.\d+\.\d+)"),
+                        ("lodash", r"lodash[-.](\d+\.\d+\.\d+)"),
+                        ("moment", r"moment[-.](\d+\.\d+\.\d+)"),
+                        ("underscore", r"underscore[-.](\d+\.\d+\.\d+)"),
+                        ("d3", r"d3[-.](\d+\.\d+\.\d+)"),
+                        ("three", r"three[-.](\d+\.\d+)")
+                    ]
+                    for n, rx in candidates:
+                        m = re.search(rx, fname, re.IGNORECASE)
+                        if m:
+                            name = n; ver = m.group(1); break
+                    return name, ver
+                def cmp_ver(a, b):
+                    try:
+                        ap = [int(x) for x in a.split('.')]
+                        bp = [int(x) for x in b.split('.')]
+                        # pad
+                        while len(ap) < len(bp): ap.append(0)
+                        while len(bp) < len(ap): bp.append(0)
+                        return (ap > bp) - (ap < bp)
+                    except:
+                        return 0
+                js_libs = []
+                outdated_js = []
+                for s in scripts:
+                    n, v = parse_lib(s)
+                    if n:
+                        latest = KNOWN.get(n)
+                        js_libs.append({"name": n, "version": v, "latest": latest, "src": s})
+                        if v and latest and cmp_ver(v, latest) < 0:
+                            outdated_js.append({
+                                "library": n,
+                                "version": v,
+                                "latest": latest,
+                                "severity": "high",
+                                "cvss": 7.5
+                            })
+                findings["js_libraries"] = js_libs
+                findings["outdated_js"] = outdated_js
                 
                 # Extract all iframes (often contain subdomains)
                 iframes = await page.evaluate("""
@@ -321,6 +395,13 @@ async def playwright_scan(target: str, raw_dir: str) -> dict:
             except Exception as e:
                 findings["error"] = f"Playwright navigation error: {str(e)}"
             
+            # Include traceroute data
+            try:
+                from scanners.traceroute import run_and_parse as tr_run
+                tr = tr_run(base_domain, raw_dir)
+                findings["traceroute"] = {"hops": tr.get("hops", []), "hop_count": tr.get("hop_count", 0)}
+            except Exception:
+                pass
             await browser.close()
     
     except ImportError:

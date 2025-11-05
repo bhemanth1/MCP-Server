@@ -2,6 +2,9 @@ import os
 import subprocess
 import re
 import socket
+import json
+from urllib.request import urlopen
+from urllib.error import URLError, HTTPError
 
 def safe_run(args, timeout=30, cwd=None):
     try:
@@ -46,7 +49,8 @@ def run_and_parse(target: str, raw_dir: str) -> dict:
         "addresses": [],
         "resolved_ips": resolved_ips,
         "all_ips": all_ips,
-        "nameservers": []
+        "nameservers": [],
+        "server_locations": []
     }
     
     # Extract IPs from nslookup output
@@ -59,5 +63,27 @@ def run_and_parse(target: str, raw_dir: str) -> dict:
             ns = line.split("Server:")[-1].strip().split()[0]
             if ns not in findings["nameservers"]:
                 findings["nameservers"].append(ns)
+    
+    # Geolocate servers (best-effort, no API key)
+    checked = set()
+    for ip in findings["addresses"] + findings["all_ips"]:
+        if ip in checked:
+            continue
+        checked.add(ip)
+        try:
+            with urlopen(f"http://ip-api.com/json/{ip}", timeout=5) as resp:
+                data = json.loads(resp.read().decode('utf-8', 'ignore'))
+                if data.get('status') == 'success':
+                    findings["server_locations"].append({
+                        "ip": ip,
+                        "country": data.get('country'),
+                        "region": data.get('regionName'),
+                        "city": data.get('city'),
+                        "lat": data.get('lat'),
+                        "lon": data.get('lon'),
+                        "isp": data.get('isp')
+                    })
+        except (URLError, HTTPError, Exception):
+            continue
     
     return findings

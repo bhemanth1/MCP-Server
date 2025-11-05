@@ -1,0 +1,437 @@
+{
+  "scan_id": "8c17186f-fd84-4385-bf01-38771f90891b",
+  "start_time": "2025-11-02T11:52:01.123850",
+  "tools": [
+    {
+      "name": "subfinder",
+      "start_time": "2025-11-02T11:52:01.138485",
+      "status": "completed",
+      "end_time": "2025-11-02T11:52:03.512048",
+      "findings_count": 0
+    },
+    {
+      "name": "nmap",
+      "start_time": "2025-11-02T11:52:03.512062",
+      "status": "completed",
+      "end_time": "2025-11-02T11:52:45.630150",
+      "findings_count": 3
+    },
+    {
+      "name": "nikto",
+      "start_time": "2025-11-02T11:52:45.630166",
+      "status": "completed",
+      "end_time": "2025-11-02T11:52:49.519401",
+      "findings_count": 6
+    },
+    {
+      "name": "gobuster",
+      "start_time": "2025-11-02T11:52:49.519408",
+      "status": "completed",
+      "end_time": "2025-11-02T11:53:31.992808",
+      "findings_count": 2
+    },
+    {
+      "name": "nslookupdns",
+      "start_time": "2025-11-02T11:53:31.992825",
+      "status": "completed",
+      "end_time": "2025-11-02T11:53:32.311687",
+      "findings_count": 0
+    },
+    {
+      "name": "traceroute",
+      "start_time": "2025-11-02T11:53:32.311694",
+      "status": "completed",
+      "end_time": "2025-11-02T11:55:24.193237",
+      "findings_count": 0
+    },
+    {
+      "name": "playwright",
+      "start_time": "2025-11-02T11:55:24.193249",
+      "status": "completed",
+      "end_time": "2025-11-02T11:57:00.621868",
+      "findings_count": 0
+    },
+    {
+      "name": "selenium",
+      "start_time": "2025-11-02T11:57:00.621890",
+      "status": "failed",
+      "end_time": "2025-11-02T11:57:00.642731",
+      "findings_count": 0
+    }
+  ],
+  "flow": [
+    {
+      "step": "subfinder_request",
+      "timestamp": "2025-11-02T11:52:01.138518",
+      "type": "request",
+      "data": {
+        "timestamp": "2025-11-02T11:52:01.138507",
+        "tool": "subfinder",
+        "method": "SCAN",
+        "url": "altoro.testfire.net",
+        "headers": {
+          "tool": "subfinder"
+        },
+        "body": ""
+      }
+    },
+    {
+      "step": "subfinder_response",
+      "timestamp": "2025-11-02T11:52:03.512042",
+      "type": "response",
+      "data": {
+        "timestamp": "2025-11-02T11:52:03.512028",
+        "tool": "subfinder",
+        "status_code": 200,
+        "headers": {},
+        "body_size": 0,
+        "body_preview": ""
+      }
+    },
+    {
+      "step": "nmap_request",
+      "timestamp": "2025-11-02T11:52:03.512074",
+      "type": "request",
+      "data": {
+        "timestamp": "2025-11-02T11:52:03.512067",
+        "tool": "nmap",
+        "method": "SCAN",
+        "url": "altoro.testfire.net",
+        "headers": {
+          "tool": "nmap"
+        },
+        "body": ""
+      }
+    },
+    {
+      "step": "nmap_response",
+      "timestamp": "2025-11-02T11:52:45.630136",
+      "type": "response",
+      "data": {
+        "timestamp": "2025-11-02T11:52:45.630102",
+        "tool": "nmap",
+        "status_code": 200,
+        "headers": {},
+        "body_size": 3,
+        "body_preview": ""
+      }
+    },
+    {
+      "step": "nikto_request",
+      "timestamp": "2025-11-02T11:52:45.630184",
+      "type": "request",
+      "data": {
+        "timestamp": "2025-11-02T11:52:45.630175",
+        "tool": "nikto",
+        "method": "SCAN",
+        "url": "altoro.testfire.net",
+        "headers": {
+          "tool": "nikto"
+        },
+        "body": ""
+      }
+    },
+    {
+      "step": "nikto_response",
+      "timestamp": "2025-11-02T11:52:49.519395",
+      "type": "response",
+      "data": {
+        "timestamp": "2025-11-02T11:52:49.519381",
+        "tool": "nikto",
+        "status_code": 200,
+        "headers": {},
+        "body_size": 6,
+        "body_preview": ""
+      }
+    },
+    {
+      "step": "gobuster_request",
+      "timestamp": "2025-11-02T11:52:49.519417",
+      "type": "request",
+      "data": {
+        "timestamp": "2025-11-02T11:52:49.519412",
+        "tool": "gobuster",
+        "method": "SCAN",
+        "url": "altoro.testfire.net",
+        "headers": {
+          "tool": "gobuster"
+        },
+        "body": ""
+      }
+    },
+    {
+      "step": "gobuster_response",
+      "timestamp": "2025-11-02T11:53:31.992790",
+      "type": "response",
+      "data": {
+        "timestamp": "2025-11-02T11:53:31.992731",
+        "tool": "gobuster",
+        "status_code": 200,
+        "headers": {},
+        "body_size": 2,
+        "body_preview": ""
+      }
+    },
+    {
+      "step": "nslookupdns_request",
+      "timestamp": "2025-11-02T11:53:31.992846",
+      "type": "request",
+      "data": {
+        "timestamp": "2025-11-02T11:53:31.992835",
+        "tool": "nslookupdns",
+        "method": "SCAN",
+        "url": "altoro.testfire.net",
+        "headers": {
+          "tool": "nslookupdns"
+        },
+        "body": ""
+      }
+    },
+    {
+      "step": "nslookupdns_response",
+      "timestamp": "2025-11-02T11:53:32.311677",
+      "type": "response",
+      "data": {
+        "timestamp": "2025-11-02T11:53:32.311664",
+        "tool": "nslookupdns",
+        "status_code": 200,
+        "headers": {},
+        "body_size": 0,
+        "body_preview": ""
+      }
+    },
+    {
+      "step": "traceroute_request",
+      "timestamp": "2025-11-02T11:53:32.311702",
+      "type": "request",
+      "data": {
+        "timestamp": "2025-11-02T11:53:32.311697",
+        "tool": "traceroute",
+        "method": "SCAN",
+        "url": "altoro.testfire.net",
+        "headers": {
+          "tool": "traceroute"
+        },
+        "body": ""
+      }
+    },
+    {
+      "step": "traceroute_response",
+      "timestamp": "2025-11-02T11:55:24.193222",
+      "type": "response",
+      "data": {
+        "timestamp": "2025-11-02T11:55:24.193200",
+        "tool": "traceroute",
+        "status_code": 200,
+        "headers": {},
+        "body_size": 0,
+        "body_preview": ""
+      }
+    },
+    {
+      "step": "playwright_request",
+      "timestamp": "2025-11-02T11:55:24.193264",
+      "type": "request",
+      "data": {
+        "timestamp": "2025-11-02T11:55:24.193256",
+        "tool": "playwright",
+        "method": "SCAN",
+        "url": "altoro.testfire.net",
+        "headers": {
+          "tool": "playwright"
+        },
+        "body": ""
+      }
+    },
+    {
+      "step": "playwright_response",
+      "timestamp": "2025-11-02T11:57:00.621851",
+      "type": "response",
+      "data": {
+        "timestamp": "2025-11-02T11:57:00.621823",
+        "tool": "playwright",
+        "status_code": 200,
+        "headers": {},
+        "body_size": 0,
+        "body_preview": ""
+      }
+    },
+    {
+      "step": "selenium_request",
+      "timestamp": "2025-11-02T11:57:00.621914",
+      "type": "request",
+      "data": {
+        "timestamp": "2025-11-02T11:57:00.621900",
+        "tool": "selenium",
+        "method": "SCAN",
+        "url": "altoro.testfire.net",
+        "headers": {
+          "tool": "selenium"
+        },
+        "body": ""
+      }
+    },
+    {
+      "step": "selenium_response",
+      "timestamp": "2025-11-02T11:57:00.642711",
+      "type": "response",
+      "data": {
+        "timestamp": "2025-11-02T11:57:00.642675",
+        "tool": "selenium",
+        "status_code": 500,
+        "headers": {},
+        "body_size": 26,
+        "body_preview": "No module named 'selenium'"
+      }
+    }
+  ],
+  "requests": [
+    {
+      "timestamp": "2025-11-02T11:52:01.138507",
+      "tool": "subfinder",
+      "method": "SCAN",
+      "url": "altoro.testfire.net",
+      "headers": {
+        "tool": "subfinder"
+      },
+      "body": ""
+    },
+    {
+      "timestamp": "2025-11-02T11:52:03.512067",
+      "tool": "nmap",
+      "method": "SCAN",
+      "url": "altoro.testfire.net",
+      "headers": {
+        "tool": "nmap"
+      },
+      "body": ""
+    },
+    {
+      "timestamp": "2025-11-02T11:52:45.630175",
+      "tool": "nikto",
+      "method": "SCAN",
+      "url": "altoro.testfire.net",
+      "headers": {
+        "tool": "nikto"
+      },
+      "body": ""
+    },
+    {
+      "timestamp": "2025-11-02T11:52:49.519412",
+      "tool": "gobuster",
+      "method": "SCAN",
+      "url": "altoro.testfire.net",
+      "headers": {
+        "tool": "gobuster"
+      },
+      "body": ""
+    },
+    {
+      "timestamp": "2025-11-02T11:53:31.992835",
+      "tool": "nslookupdns",
+      "method": "SCAN",
+      "url": "altoro.testfire.net",
+      "headers": {
+        "tool": "nslookupdns"
+      },
+      "body": ""
+    },
+    {
+      "timestamp": "2025-11-02T11:53:32.311697",
+      "tool": "traceroute",
+      "method": "SCAN",
+      "url": "altoro.testfire.net",
+      "headers": {
+        "tool": "traceroute"
+      },
+      "body": ""
+    },
+    {
+      "timestamp": "2025-11-02T11:55:24.193256",
+      "tool": "playwright",
+      "method": "SCAN",
+      "url": "altoro.testfire.net",
+      "headers": {
+        "tool": "playwright"
+      },
+      "body": ""
+    },
+    {
+      "timestamp": "2025-11-02T11:57:00.621900",
+      "tool": "selenium",
+      "method": "SCAN",
+      "url": "altoro.testfire.net",
+      "headers": {
+        "tool": "selenium"
+      },
+      "body": ""
+    }
+  ],
+  "responses": [
+    {
+      "timestamp": "2025-11-02T11:52:03.512028",
+      "tool": "subfinder",
+      "status_code": 200,
+      "headers": {},
+      "body_size": 0,
+      "body_preview": ""
+    },
+    {
+      "timestamp": "2025-11-02T11:52:45.630102",
+      "tool": "nmap",
+      "status_code": 200,
+      "headers": {},
+      "body_size": 3,
+      "body_preview": ""
+    },
+    {
+      "timestamp": "2025-11-02T11:52:49.519381",
+      "tool": "nikto",
+      "status_code": 200,
+      "headers": {},
+      "body_size": 6,
+      "body_preview": ""
+    },
+    {
+      "timestamp": "2025-11-02T11:53:31.992731",
+      "tool": "gobuster",
+      "status_code": 200,
+      "headers": {},
+      "body_size": 2,
+      "body_preview": ""
+    },
+    {
+      "timestamp": "2025-11-02T11:53:32.311664",
+      "tool": "nslookupdns",
+      "status_code": 200,
+      "headers": {},
+      "body_size": 0,
+      "body_preview": ""
+    },
+    {
+      "timestamp": "2025-11-02T11:55:24.193200",
+      "tool": "traceroute",
+      "status_code": 200,
+      "headers": {},
+      "body_size": 0,
+      "body_preview": ""
+    },
+    {
+      "timestamp": "2025-11-02T11:57:00.621823",
+      "tool": "playwright",
+      "status_code": 200,
+      "headers": {},
+      "body_size": 0,
+      "body_preview": ""
+    },
+    {
+      "timestamp": "2025-11-02T11:57:00.642675",
+      "tool": "selenium",
+      "status_code": 500,
+      "headers": {},
+      "body_size": 26,
+      "body_preview": "No module named 'selenium'"
+    }
+  ],
+  "end_time": "2025-11-02T11:57:00.642765"
+}

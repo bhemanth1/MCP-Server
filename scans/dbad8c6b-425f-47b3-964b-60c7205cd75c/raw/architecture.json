@@ -1,0 +1,384 @@
+{
+  "scan_id": "dbad8c6b-425f-47b3-964b-60c7205cd75c",
+  "start_time": "2025-11-03T05:15:13.514411",
+  "tools": [
+    {
+      "name": "subfinder",
+      "start_time": "2025-11-03T05:15:13.537815",
+      "status": "completed",
+      "end_time": "2025-11-03T05:15:27.867770",
+      "findings_count": 20
+    },
+    {
+      "name": "nmap",
+      "start_time": "2025-11-03T05:15:27.867795",
+      "status": "completed",
+      "end_time": "2025-11-03T05:16:30.668269",
+      "findings_count": 8
+    },
+    {
+      "name": "nikto",
+      "start_time": "2025-11-03T05:16:30.668283",
+      "status": "completed",
+      "end_time": "2025-11-03T05:20:43.717797",
+      "findings_count": 5
+    },
+    {
+      "name": "gobuster",
+      "start_time": "2025-11-03T05:20:43.717814",
+      "status": "completed",
+      "end_time": "2025-11-03T05:21:18.460193",
+      "findings_count": 5
+    },
+    {
+      "name": "nslookupdns",
+      "start_time": "2025-11-03T05:21:18.460206",
+      "status": "completed",
+      "end_time": "2025-11-03T05:21:20.086039",
+      "findings_count": 0
+    },
+    {
+      "name": "traceroute",
+      "start_time": "2025-11-03T05:21:20.086063",
+      "status": "completed",
+      "end_time": "2025-11-03T05:22:37.071588",
+      "findings_count": 0
+    },
+    {
+      "name": "wappalyzer",
+      "start_time": "2025-11-03T05:22:37.071612",
+      "status": "completed",
+      "end_time": "2025-11-03T05:22:39.311310",
+      "findings_count": 0
+    }
+  ],
+  "flow": [
+    {
+      "step": "subfinder_request",
+      "timestamp": "2025-11-03T05:15:13.537842",
+      "type": "request",
+      "data": {
+        "timestamp": "2025-11-03T05:15:13.537834",
+        "tool": "subfinder",
+        "method": "SCAN",
+        "url": "woxsen.edu.in",
+        "headers": {
+          "tool": "subfinder"
+        },
+        "body": ""
+      }
+    },
+    {
+      "step": "subfinder_response",
+      "timestamp": "2025-11-03T05:15:27.867755",
+      "type": "response",
+      "data": {
+        "timestamp": "2025-11-03T05:15:27.867724",
+        "tool": "subfinder",
+        "status_code": 200,
+        "headers": {},
+        "body_size": 20,
+        "body_preview": ""
+      }
+    },
+    {
+      "step": "nmap_request",
+      "timestamp": "2025-11-03T05:15:27.867820",
+      "type": "request",
+      "data": {
+        "timestamp": "2025-11-03T05:15:27.867807",
+        "tool": "nmap",
+        "method": "SCAN",
+        "url": "woxsen.edu.in",
+        "headers": {
+          "tool": "nmap"
+        },
+        "body": ""
+      }
+    },
+    {
+      "step": "nmap_response",
+      "timestamp": "2025-11-03T05:16:30.668261",
+      "type": "response",
+      "data": {
+        "timestamp": "2025-11-03T05:16:30.668241",
+        "tool": "nmap",
+        "status_code": 200,
+        "headers": {},
+        "body_size": 8,
+        "body_preview": ""
+      }
+    },
+    {
+      "step": "nikto_request",
+      "timestamp": "2025-11-03T05:16:30.668293",
+      "type": "request",
+      "data": {
+        "timestamp": "2025-11-03T05:16:30.668288",
+        "tool": "nikto",
+        "method": "SCAN",
+        "url": "woxsen.edu.in",
+        "headers": {
+          "tool": "nikto"
+        },
+        "body": ""
+      }
+    },
+    {
+      "step": "nikto_response",
+      "timestamp": "2025-11-03T05:20:43.717781",
+      "type": "response",
+      "data": {
+        "timestamp": "2025-11-03T05:20:43.717750",
+        "tool": "nikto",
+        "status_code": 200,
+        "headers": {},
+        "body_size": 5,
+        "body_preview": ""
+      }
+    },
+    {
+      "step": "gobuster_request",
+      "timestamp": "2025-11-03T05:20:43.717832",
+      "type": "request",
+      "data": {
+        "timestamp": "2025-11-03T05:20:43.717821",
+        "tool": "gobuster",
+        "method": "SCAN",
+        "url": "woxsen.edu.in",
+        "headers": {
+          "tool": "gobuster"
+        },
+        "body": ""
+      }
+    },
+    {
+      "step": "gobuster_response",
+      "timestamp": "2025-11-03T05:21:18.460182",
+      "type": "response",
+      "data": {
+        "timestamp": "2025-11-03T05:21:18.460158",
+        "tool": "gobuster",
+        "status_code": 200,
+        "headers": {},
+        "body_size": 5,
+        "body_preview": ""
+      }
+    },
+    {
+      "step": "nslookupdns_request",
+      "timestamp": "2025-11-03T05:21:18.460220",
+      "type": "request",
+      "data": {
+        "timestamp": "2025-11-03T05:21:18.460213",
+        "tool": "nslookupdns",
+        "method": "SCAN",
+        "url": "woxsen.edu.in",
+        "headers": {
+          "tool": "nslookupdns"
+        },
+        "body": ""
+      }
+    },
+    {
+      "step": "nslookupdns_response",
+      "timestamp": "2025-11-03T05:21:20.086015",
+      "type": "response",
+      "data": {
+        "timestamp": "2025-11-03T05:21:20.085970",
+        "tool": "nslookupdns",
+        "status_code": 200,
+        "headers": {},
+        "body_size": 0,
+        "body_preview": ""
+      }
+    },
+    {
+      "step": "traceroute_request",
+      "timestamp": "2025-11-03T05:21:20.086093",
+      "type": "request",
+      "data": {
+        "timestamp": "2025-11-03T05:21:20.086076",
+        "tool": "traceroute",
+        "method": "SCAN",
+        "url": "woxsen.edu.in",
+        "headers": {
+          "tool": "traceroute"
+        },
+        "body": ""
+      }
+    },
+    {
+      "step": "traceroute_response",
+      "timestamp": "2025-11-03T05:22:37.071563",
+      "type": "response",
+      "data": {
+        "timestamp": "2025-11-03T05:22:37.071522",
+        "tool": "traceroute",
+        "status_code": 200,
+        "headers": {},
+        "body_size": 0,
+        "body_preview": ""
+      }
+    },
+    {
+      "step": "wappalyzer_request",
+      "timestamp": "2025-11-03T05:22:37.071642",
+      "type": "request",
+      "data": {
+        "timestamp": "2025-11-03T05:22:37.071625",
+        "tool": "wappalyzer",
+        "method": "SCAN",
+        "url": "woxsen.edu.in",
+        "headers": {
+          "tool": "wappalyzer"
+        },
+        "body": ""
+      }
+    },
+    {
+      "step": "wappalyzer_response",
+      "timestamp": "2025-11-03T05:22:39.311298",
+      "type": "response",
+      "data": {
+        "timestamp": "2025-11-03T05:22:39.311274",
+        "tool": "wappalyzer",
+        "status_code": 200,
+        "headers": {},
+        "body_size": 0,
+        "body_preview": ""
+      }
+    }
+  ],
+  "requests": [
+    {
+      "timestamp": "2025-11-03T05:15:13.537834",
+      "tool": "subfinder",
+      "method": "SCAN",
+      "url": "woxsen.edu.in",
+      "headers": {
+        "tool": "subfinder"
+      },
+      "body": ""
+    },
+    {
+      "timestamp": "2025-11-03T05:15:27.867807",
+      "tool": "nmap",
+      "method": "SCAN",
+      "url": "woxsen.edu.in",
+      "headers": {
+        "tool": "nmap"
+      },
+      "body": ""
+    },
+    {
+      "timestamp": "2025-11-03T05:16:30.668288",
+      "tool": "nikto",
+      "method": "SCAN",
+      "url": "woxsen.edu.in",
+      "headers": {
+        "tool": "nikto"
+      },
+      "body": ""
+    },
+    {
+      "timestamp": "2025-11-03T05:20:43.717821",
+      "tool": "gobuster",
+      "method": "SCAN",
+      "url": "woxsen.edu.in",
+      "headers": {
+        "tool": "gobuster"
+      },
+      "body": ""
+    },
+    {
+      "timestamp": "2025-11-03T05:21:18.460213",
+      "tool": "nslookupdns",
+      "method": "SCAN",
+      "url": "woxsen.edu.in",
+      "headers": {
+        "tool": "nslookupdns"
+      },
+      "body": ""
+    },
+    {
+      "timestamp": "2025-11-03T05:21:20.086076",
+      "tool": "traceroute",
+      "method": "SCAN",
+      "url": "woxsen.edu.in",
+      "headers": {
+        "tool": "traceroute"
+      },
+      "body": ""
+    },
+    {
+      "timestamp": "2025-11-03T05:22:37.071625",
+      "tool": "wappalyzer",
+      "method": "SCAN",
+      "url": "woxsen.edu.in",
+      "headers": {
+        "tool": "wappalyzer"
+      },
+      "body": ""
+    }
+  ],
+  "responses": [
+    {
+      "timestamp": "2025-11-03T05:15:27.867724",
+      "tool": "subfinder",
+      "status_code": 200,
+      "headers": {},
+      "body_size": 20,
+      "body_preview": ""
+    },
+    {
+      "timestamp": "2025-11-03T05:16:30.668241",
+      "tool": "nmap",
+      "status_code": 200,
+      "headers": {},
+      "body_size": 8,
+      "body_preview": ""
+    },
+    {
+      "timestamp": "2025-11-03T05:20:43.717750",
+      "tool": "nikto",
+      "status_code": 200,
+      "headers": {},
+      "body_size": 5,
+      "body_preview": ""
+    },
+    {
+      "timestamp": "2025-11-03T05:21:18.460158",
+      "tool": "gobuster",
+      "status_code": 200,
+      "headers": {},
+      "body_size": 5,
+      "body_preview": ""
+    },
+    {
+      "timestamp": "2025-11-03T05:21:20.085970",
+      "tool": "nslookupdns",
+      "status_code": 200,
+      "headers": {},
+      "body_size": 0,
+      "body_preview": ""
+    },
+    {
+      "timestamp": "2025-11-03T05:22:37.071522",
+      "tool": "traceroute",
+      "status_code": 200,
+      "headers": {},
+      "body_size": 0,
+      "body_preview": ""
+    },
+    {
+      "timestamp": "2025-11-03T05:22:39.311274",
+      "tool": "wappalyzer",
+      "status_code": 200,
+      "headers": {},
+      "body_size": 0,
+      "body_preview": ""
+    }
+  ],
+  "end_time": "2025-11-03T05:22:39.311331"
+}
