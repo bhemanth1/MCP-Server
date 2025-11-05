@@ -38,24 +38,32 @@ A comprehensive, modern desktop application for cybersecurity reconnaissance tha
 
 ```
 
-┌─────────────────────────────────────────┐
-│      Frontend (React + Electron)        │
-│  - Dashboard UI                         │
-│  - Real-time progress tracking          │
-│  - Interactive visualizations           │
-└──────────────┬──────────────────────────┘
-│ HTTP/JSON API
-┌──────────────▼──────────────────────────┐
-│      Backend (FastAPI)                  │
-│  - REST API endpoints                   │
-│  - Worker orchestration                 │
-│  - Tool execution management            │
-└──────────────┬──────────────────────────┘
-│ Subprocess Calls
-┌──────────────▼──────────────────────────┐
-│   Scanner Tools                         │
-│  - nmap, subfinder, nikto, etc.         │
-└─────────────────────────────────────────┘
+                   ┌────────────────────────────────────────────┐
+                   │          Frontend (React + Electron)        │
+                   │────────────────────────────────────────────│
+                   │ • Dashboard UI                              │
+                   │ • Real-time progress tracking               │
+                   │ • Interactive visualizations                │
+                   └───────────────────────┬────────────────────┘
+                                           │
+                                   (HTTP / JSON API)
+                                           │
+                   ┌───────────────────────▼────────────────────┐
+                   │              Backend (FastAPI)              │
+                   │────────────────────────────────────────────│
+                   │ • REST API endpoints                        │
+                   │ • Worker orchestration                      │
+                   │ • Tool execution management                 │
+                   └───────────────────────┬────────────────────┘
+                                           │
+                                   (Subprocess Calls)
+                                           │
+                   ┌───────────────────────▼────────────────────┐
+                   │              Scanner Tools                  │
+                   │────────────────────────────────────────────│
+                   │ • nmap, subfinder, nikto, etc.              │
+                   └────────────────────────────────────────────┘
+
 
 ````
 
@@ -489,3 +497,4 @@ For issues or suggestions:
 
 Would you like me to include a **“Screenshots” section** (with placeholders for UI images like dashboard, progress, and reports)? It makes your GitHub project look more professional.
 ```
+
